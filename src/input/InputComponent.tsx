@@ -1,10 +1,21 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import styled from 'styled-components'
 import { emitHeroAction } from '../Events/Events'
+import { Point, vectorApproximateDirection } from '../math/Point'
 import { mapInputToDirection, mapKeyToUserInput } from './UserInput'
-import './InputComponent.css'
 
-export function InputComponent(props: { children: JSX.Element }) {
+const StyledInputComponent = styled.div`
+    height: 100%;
+    width: 100%;
+    &:focus-visible {
+        outline: none;
+    }
+`
+
+export function InputComponent(props: { children: JSX.Element[] }) {
+    const [pointerDownCoordinates, setPointerDownCoordinates] = useState<Point>({ x: 0, y: 0 })
     const appRef = useRef(null)
+
     useEffect(() => {
         //@ts-ignore
         appRef.current?.focus()
@@ -22,11 +33,26 @@ export function InputComponent(props: { children: JSX.Element }) {
         return input
     }
 
+    const onPointerUp = (point: Point) => {
+        const direction = vectorApproximateDirection(
+            {
+                x: point.x - pointerDownCoordinates.x,
+                y: point.y - pointerDownCoordinates.y,
+            },
+            { minLength: 50, degreesTolerance: 30 }
+        )
+        if (direction !== undefined) {
+            emitHeroAction({ direction: direction })
+        }
+    }
+
     return (
-        <div
-            id="input-component"
+        <StyledInputComponent
             ref={appRef}
             tabIndex={0}
+            autoFocus
+            onPointerDown={(event) => setPointerDownCoordinates({ x: event.screenX, y: event.screenY })}
+            onPointerUp={(e) => onPointerUp({ x: e.screenX, y: e.screenY })}
             onKeyDown={(event) => {
                 if (!event.metaKey && !event.shiftKey && !event.ctrlKey) {
                     if (mapKeyToUserInput(event.code)) {
@@ -39,7 +65,7 @@ export function InputComponent(props: { children: JSX.Element }) {
                 handleKeyPressed(event.code)
             }}
         >
-            {props.children}
-        </div>
+            {...props.children}
+        </StyledInputComponent>
     )
 }

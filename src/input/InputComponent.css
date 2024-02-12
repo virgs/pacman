@@ -1,7 +1,0 @@
-#input-component {
-    height: 100%;
-}
-
-#input-component:focus-visible {
-    outline: none;
-}
