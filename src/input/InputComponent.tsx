@@ -1,18 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
 import { emitHeroAction } from '../Events/Events'
 import { Point, vectorApproximateDirection } from '../math/Point'
-import { mapInputToDirection, mapKeyToUserInput } from './UserInput'
+import { mapInputToDirection, mapKeyToUserInput } from './Input'
+import "./InputComponent.scss"
 
-const StyledInputComponent = styled.div`
-    height: 100%;
-    width: 100%;
-    &:focus-visible {
-        outline: none;
-    }
-`
-
-export function InputComponent(props: { children: JSX.Element[] }) {
+export const InputComponent = (props: { children: JSX.Element }): JSX.Element => {
     const [pointerDownCoordinates, setPointerDownCoordinates] = useState<Point>({ x: 0, y: 0 })
     const appRef = useRef(null)
 
@@ -47,7 +39,8 @@ export function InputComponent(props: { children: JSX.Element[] }) {
     }
 
     return (
-        <StyledInputComponent
+        <div
+            className='input-component'
             ref={appRef}
             tabIndex={0}
             autoFocus
@@ -65,7 +58,8 @@ export function InputComponent(props: { children: JSX.Element[] }) {
                 handleKeyPressed(event.code)
             }}
         >
-            {...props.children}
-        </StyledInputComponent>
+            {props.children}
+        </div>
     )
 }
+

@@ -1,23 +1,21 @@
-import styled from 'styled-components';
 import { InputComponent } from './input/InputComponent';
-
-const StyledRoot = styled.div`
-  margin: 0 auto;
-  text-align: center;
-  touch-action: pan-y;
-  overflow: hidden;
-  height: 100svh;
-  width: 100svw;
-  user-select: none;
-`
+import { PacmanComponent } from './Game/PacmanComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import "./Root.scss"
 
 export default function Root(): JSX.Element {
   return (
-    <StyledRoot>
+    <div>
       <InputComponent>
-        <></>
-        <></>
+        <div>
+          <h1>Virgs</h1>
+          <h2>Virgs</h2>
+          <h3>Virgs</h3>
+          <FontAwesomeIcon icon={faEnvelope} />
+          <PacmanComponent></PacmanComponent>
+        </div>
       </InputComponent>
-    </StyledRoot>
+    </div>
   )
 }

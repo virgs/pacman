@@ -1,0 +1,80 @@
+:root {
+    --pacman-body-color: yellow;
+}
+
+.pacman-body {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 200px;
+    box-shadow: 0 0 10px 0px var(--pacman-body-color);
+    // outline: 15px solid blue;
+    // outline-offset: 0px;
+    border-radius: 20px;
+    animation: walk 2000ms linear infinite;
+
+    div {
+        display: flex;
+        height: 50%;
+
+        div {
+            border: 0px solid var(--pacman-body-color);
+
+            width: 50%;
+            height: 100%;
+        }
+    }
+}
+
+@keyframes walk {
+    100% {
+        transform: translateX(100px);
+    }
+}
+
+.pacman-top-left {
+    border-top-left-radius: 100%;
+    border-left-width: 1px !important;
+    border-top-width: 1px !important;
+}
+
+.pacman-top-right {
+    border-top-right-radius: 100%;
+    border-right-width: 1px !important;
+    border-top-width: 1px !important;
+    border-bottom-width: 1px !important;
+}
+
+.pacman-top-right::before {
+    content: " ";
+    width: 2px;
+    height: 2px;
+    border-radius: 100%;
+    background-color: var(--pacman-body-color);
+    box-shadow: 0 0 5px 1px var(--pacman-body-color);
+    position: relative;
+    top: 35%;
+    left: 15%;
+}
+
+.pacman-bottom-left {
+    border-bottom-left-radius: 100%;
+    border-left-width: 1px !important;
+    border-bottom-width: 1px !important;
+}
+
+.pacman-bottom-right {
+    transform-origin: top left;
+    transform: rotate(50deg);
+    border-bottom-right-radius: 100%;
+    border-right-width: 1px !important;
+    border-bottom-width: 1px !important;
+    border-top-width: 1px !important;
+    animation: eat-animation 200ms ease infinite alternate;
+}
+
+@keyframes eat-animation {
+    to {
+        transform: rotate(0deg);
+    }
+}
