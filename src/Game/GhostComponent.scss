@@ -1,5 +1,26 @@
 :root {
     --ghost-animations-duration: calc(var(--game-update-cycle) * 4);
+
+    --blinky-body-color: #FF0000;
+    --pinky-body-color: #FFB8FF;
+    --inky-body-color: #00FFFF;
+    --clyde-body-color: #FFB852;
+}
+
+[data-ghost-name="blinky"] {
+    --ghost-color: var(--blinky-body-color);
+}
+
+[data-ghost-name="pinky"] {
+    --ghost-color: var(--pinky-body-color);
+}
+
+[data-ghost-name="inky"] {
+    --ghost-color: var(--inky-body-color);
+}
+
+[data-ghost-name="clyde"] {
+    --ghost-color: var(--clyde-body-color);
 }
 
 .ghost-container {
@@ -21,8 +42,8 @@
     div {
         width: 50%;
         border-radius: 100%;
-        background-color: red;
-        box-shadow: 0 1px 3px 1px red;
+        background-color: var(--ghost-color);
+        box-shadow: 0 1px 3px 1px var(--ghost-color);
     }
 }
 
@@ -34,11 +55,11 @@
 
 .ghost-top {
     height: 80%;
-    border: 1px solid red;
+    border: 1px solid var(--ghost-color);
     border-bottom: none;
     border-top-left-radius: 100%;
     border-top-right-radius: 100%;
-    box-shadow: 0 -1px 10px 0px red;
+    box-shadow: 0 -1px 10px 0px var(--ghost-color);
     transition: height;
     animation: head-stretch var(--ghost-animations-duration) ease-in-out infinite alternate;
 }
@@ -59,7 +80,7 @@
 
     span {
         width: 33%;
-        border: 1px solid red;
+        border: 1px solid var(--ghost-color);
         border-bottom-left-radius: 100%;
         border-bottom-right-radius: 100%;
         border-top: none;

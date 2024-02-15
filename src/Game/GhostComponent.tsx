@@ -6,7 +6,7 @@ export type GhostComponentProps = {
 }
 
 export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
-    return <div className='ghost-container'>
+    return <div data-ghost-name='blinky' className='ghost-container'>
         <div className="ghost-eyes">
             <div></div>
             <div></div>
