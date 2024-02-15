@@ -1,0 +1,73 @@
+:root {
+    --ghost-animations-duration: calc(var(--game-update-cycle) * 4);
+}
+
+.ghost-container {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 500px;
+}
+
+.ghost-eyes {
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    width: 30%;
+    height: 20%;
+    display: flex;
+    animation: eyes-animation var(--ghost-animations-duration) ease-in-out infinite alternate;
+
+    div {
+        width: 50%;
+        border-radius: 100%;
+        background-color: red;
+        box-shadow: 0 1px 3px 1px red;
+    }
+}
+
+@keyframes eyes-animation {
+    to {
+        left: 45%;
+    }
+}
+
+.ghost-top {
+    height: 80%;
+    border: 1px solid red;
+    border-bottom: none;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    box-shadow: 0 -1px 10px 0px red;
+    transition: height;
+    animation: head-stretch var(--ghost-animations-duration) ease-in-out infinite alternate;
+}
+
+@keyframes head-stretch {
+    to {
+        height: 90%;
+    }
+}
+
+.ghost-bottom {
+    position: relative;
+    height: 20%;
+    bottom: 10%;
+    left: 0;
+    transition: left;
+    display: flex;
+
+    span {
+        width: 33%;
+        border: 1px solid red;
+        border-bottom-left-radius: 100%;
+        border-bottom-right-radius: 100%;
+        border-top: none;
+    }
+}
+
+@keyframes bottom-left {
+    to {
+        left: -10%;
+    }
+}

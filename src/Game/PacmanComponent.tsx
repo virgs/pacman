@@ -46,15 +46,15 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
                 newPosition.x += pacmanPixelsPerCycle;
                 break
         }
-        setBodyStyle({
-            transform: bodyTransform
-        })
-        //emit new tile position
-        setPosition(newPosition)
-        setContainerStyle({
-            ...containerStyle,
-            transform: `translate(${newPosition.x}px, ${newPosition.y}px)`
-        })
+        // setBodyStyle({
+        //     transform: bodyTransform
+        // })
+        // //emit new tile position
+        // setPosition(newPosition)
+        // setContainerStyle({
+        //     ...containerStyle,
+        //     transform: `translate(${newPosition.x}px, ${newPosition.y}px)`
+        // })
     }, gameUpdateCycle)
     return <div className='pacman-container' style={containerStyle}>
         <div className='pacman-body' style={bodyStyle}>
@@ -62,7 +62,7 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
                 <div className="pacman-top-left"></div>
                 <div className="pacman-top-right"></div>
             </div>
-            <div style={{ marginTop: '-1px' }}>
+            <div style={{ marginTop: '0px' }}>
                 <div className="pacman-bottom-left"></div>
                 <div className="pacman-bottom-right"></div>
             </div>
