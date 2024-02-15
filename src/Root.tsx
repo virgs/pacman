@@ -6,16 +6,11 @@ import "./Root.scss"
 
 export default function Root(): JSX.Element {
   return (
-    <div>
-      <InputComponent>
-        <div>
-          <h1>Virgs</h1>
-          <h2>Virgs</h2>
-          <h3>Virgs</h3>
-          <FontAwesomeIcon icon={faEnvelope} />
-          <PacmanComponent></PacmanComponent>
-        </div>
-      </InputComponent>
-    </div>
+    <InputComponent>
+      <div>
+        <FontAwesomeIcon icon={faEnvelope} />
+        <PacmanComponent initialPosition={{ x: 200, y: 200 }}></PacmanComponent>
+      </div>
+    </InputComponent>
   )
 }

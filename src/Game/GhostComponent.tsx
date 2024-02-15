@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { HeroActionEventType, useHeroActionListener } from "../Events/Events"
 import { GameConfig } from "../config"
-import { Direction } from "../direction/Direction"
 import { useInterval } from "../hooks/UseInterval"
 import { Origin, Point } from "../math/Point"
 import "./PacmanComponent.scss"
+import { Direction, Directions } from "../direction/Direction"
 
 export type PacmanComponentProps = {
     initialPosition: Point

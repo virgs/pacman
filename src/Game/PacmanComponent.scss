@@ -2,16 +2,18 @@
     --pacman-body-color: yellow;
 }
 
-.pacman-body {
+.pacman-container {
+    position: absolute;
     width: 20px;
     height: 20px;
-    position: absolute;
-    left: 200px;
     box-shadow: 0 0 10px 0px var(--pacman-body-color);
-    // outline: 15px solid blue;
-    // outline-offset: 0px;
     border-radius: 20px;
-    animation: walk 2000ms linear infinite;
+    transition: transform linear var(--game-update-cycle);
+
+}
+
+.pacman-body {
+    height: 100%;
 
     div {
         display: flex;
@@ -23,12 +25,6 @@
             width: 50%;
             height: 100%;
         }
-    }
-}
-
-@keyframes walk {
-    100% {
-        transform: translateX(100px);
     }
 }
 
