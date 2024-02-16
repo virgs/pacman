@@ -5,6 +5,8 @@
     --pacman-tiles-per-cycle: .75;
     --ghost-tiles-per-cycle: .5;
 
+    --empty-color: black;
+    --wall-color: blue;
     --pacman-body-color: #fdff00;
     --blinky-body-color: #FF0000;
     --pinky-body-color: #FFB8FF;

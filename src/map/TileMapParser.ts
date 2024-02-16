@@ -1,12 +1,12 @@
 import binUrl from '../assets/level-1.txt?url';
-import { MapTiles } from './MapTiles';
+import { Tile } from './Tile';
 
-export class MapParser {
-    public async parse(): Promise<MapTiles[][]> {
+export class TileMapParser {
+    public async parse(): Promise<Tile[][]> {
         const body = (await fetch(binUrl)).body
         const content = (await body?.getReader().read())?.value;
-        const lines: MapTiles[][] = []
-        const line: MapTiles[] = []
+        const lines: Tile[][] = []
+        const line: Tile[] = []
         for (let charCode of content!) {
             const char = String.fromCharCode(charCode)
             if (char === '\n') {
@@ -22,15 +22,15 @@ export class MapParser {
         return lines;
     }
 
-    private getTileFromBitMap(char: string): MapTiles {
+    private getTileFromBitMap(char: string): Tile {
         switch (char.toUpperCase()) {
-            case '#': return MapTiles.WALL;
-            case '@': return MapTiles.HERO;
-            case 'P': return MapTiles.PINKY;
-            case 'B': return MapTiles.BLINKY;
-            case 'I': return MapTiles.INKY;
-            case 'C': return MapTiles.CLYDE;
+            case '#': return Tile.WALL;
+            case '@': return Tile.HERO;
+            case 'P': return Tile.PINKY;
+            case 'B': return Tile.BLINKY;
+            case 'I': return Tile.INKY;
+            case 'C': return Tile.CLYDE;
         }
-        return MapTiles.EMPTY;
+        return Tile.EMPTY;
     }
 }

@@ -1,5 +1,5 @@
 
-export enum MapTiles {
+export enum Tile {
     WALL,
     EMPTY,
     GHOST_CAGE,
