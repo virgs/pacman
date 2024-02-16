@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { HeroActionEventType, useHeroActionListener } from "../Events/Events"
+import { HeroActionEventType, useHeroActionListener } from "../events/Events"
 import { GameConfig } from "../config"
 import { Direction } from "../direction/Direction"
 import { useInterval } from "../hooks/UseInterval"
@@ -7,43 +7,46 @@ import { Origin, Point } from "../math/Point"
 import "./PacmanComponent.scss"
 
 export type PacmanComponentProps = {
-    initialPosition: Point
+    initialTilePosition: Point
 }
 
 export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
+    const gameUpdateCycle = GameConfig.gameUpdateCycle()
+    const pacmanTilesPerCycle = GameConfig.pacmanTilesPerCycle()
+    const pixelsPerCycle = gameUpdateCycle * pacmanTilesPerCycle;
+    const tileSize = GameConfig.tileSize()
+
     const [direction, setDirection] = useState<Direction>(Direction.RIGHT)
-    const [position, setPosition] = useState<Point>(Origin)
+    const [tilePosition, setTilePosition] = useState<Point>(props.initialTilePosition)
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
-        left: props.initialPosition.x + 'px',
-        top: props.initialPosition.y + 'px'
+        left: tilePosition.x * tileSize + 'px',
+        top: tilePosition.y * tileSize + 'px'
     })
     const [bodyStyle, setBodyStyle] = useState<React.CSSProperties>({})
-    const gameUpdateCycle = GameConfig.gameUpdateCycle()
-    const pacmanPixelsPerCycle = GameConfig.pacmanPixelsPerCycle()
 
     useHeroActionListener((payload: HeroActionEventType) => setDirection(payload.direction))
 
     useInterval(() => {
-        const newPosition = {
-            x: position.x,
-            y: position.y
+        const newTilePosition = {
+            x: tilePosition.x,
+            y: tilePosition.y
         }
         let bodyTransform = ''
         switch (direction) {
             case Direction.UP:
-                newPosition.y -= pacmanPixelsPerCycle;
+                newTilePosition.y -= 1;
                 bodyTransform = 'rotate(-90deg)';
                 break
             case Direction.DOWN:
-                newPosition.y += pacmanPixelsPerCycle;
+                newTilePosition.y += 1;
                 bodyTransform = 'rotate(90deg)';
                 break
             case Direction.LEFT:
-                newPosition.x -= pacmanPixelsPerCycle;
+                newTilePosition.x -= 1;
                 bodyTransform = 'scaleX(-1)';
                 break
             case Direction.RIGHT:
-                newPosition.x += pacmanPixelsPerCycle;
+                newTilePosition.x += 1;
                 break
         }
         // setBodyStyle({
@@ -53,7 +56,7 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
         // setPosition(newPosition)
         // setContainerStyle({
         //     ...containerStyle,
-        //     transform: `translate(${newPosition.x}px, ${newPosition.y}px)`
+        //     transform: `translate(${newPosition.x * pixelsPerCycle}px, ${newPosition.y * pixelsPerCycle}px)`
         // })
     }, gameUpdateCycle)
     return <div className='pacman-container' style={containerStyle}>

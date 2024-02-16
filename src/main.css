@@ -1,6 +1,15 @@
 :root {
     --game-update-cycle: 100ms;
-    --pacman-pixels-per-cycle: 10px;
+
+    --tile-size: 20px;
+    --pacman-tiles-per-cycle: .75;
+    --ghost-tiles-per-cycle: .5;
+
+    --pacman-body-color: #fdff00;
+    --blinky-body-color: #FF0000;
+    --pinky-body-color: #FFB8FF;
+    --inky-body-color: #00FFFF;
+    --clyde-body-color: #FFB852;
 
     color-scheme: light dark;
     font-synthesis: none;

@@ -1,13 +1,9 @@
-:root {
-    --pacman-body-color: #fdff00;
-}
-
 .pacman-container {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: var(--tile-size);
+    height: var(--tile-size);
     box-shadow: 0 0 10px 0px var(--pacman-body-color);
-    border-radius: 20px;
+    border-radius: var(--tile-size);
     transition: transform linear var(--game-update-cycle);
 }
 

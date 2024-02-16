@@ -1,10 +1,7 @@
 :root {
-    --ghost-animations-duration: calc(var(--game-update-cycle) * 4);
-
-    --blinky-body-color: #FF0000;
-    --pinky-body-color: #FFB8FF;
-    --inky-body-color: #00FFFF;
-    --clyde-body-color: #FFB852;
+    --ghost-eyes-animation-duration: calc(var(--game-update-cycle) * 4);
+    --ghost-head-stretch-animation-duration: calc(var(--game-update-cycle) * 4.3);
+    --ghost-tentacles-stretch-animation-duration: calc(var(--game-update-cycle) * 4.6);
 }
 
 [data-ghost-name="blinky"] {
@@ -25,9 +22,10 @@
 
 .ghost-container {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: var(--tile-size);
+    height: var(--tile-size);
     left: 500px;
+
 }
 
 .ghost-eyes {
@@ -37,7 +35,7 @@
     width: 30%;
     height: 20%;
     display: flex;
-    animation: eyes-animation var(--ghost-animations-duration) ease-in-out infinite alternate;
+    animation: eyes-animation var(--ghost-eyes-animation-duration) ease-in-out infinite alternate;
 
     div {
         width: 50%;
@@ -61,10 +59,10 @@
     border-top-right-radius: 100%;
     box-shadow: 0 -1px 10px 0px var(--ghost-color);
     transition: height;
-    animation: head-stretch var(--ghost-animations-duration) ease-in-out infinite alternate;
+    animation: vertical-stretch var(--ghost-head-stretch-animation-duration) ease-in-out infinite alternate;
 }
 
-@keyframes head-stretch {
+@keyframes vertical-stretch {
     to {
         height: 90%;
     }
@@ -80,15 +78,15 @@
 
     span {
         width: 33%;
+        height: 30%;
         border: 1px solid var(--ghost-color);
         border-bottom-left-radius: 100%;
         border-bottom-right-radius: 100%;
         border-top: none;
+        animation: vertical-stretch var(--ghost-tentacles-stretch-animation-duration) ease-in-out infinite alternate;
     }
-}
 
-@keyframes bottom-left {
-    to {
-        left: -10%;
+    span:nth-child(even) {
+        animation-delay: calc(var(--ghost-tentacles-stretch-animation-duration) * 1.23);
     }
 }

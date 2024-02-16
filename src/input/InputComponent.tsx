@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { emitHeroAction } from '../Events/Events'
+import { emitHeroAction } from '../events/Events'
 import { Point, vectorApproximateDirection } from '../math/Point'
 import { mapInputToDirection, mapKeyToUserInput } from './Input'
 import "./InputComponent.scss"
