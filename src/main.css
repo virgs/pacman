@@ -1,9 +1,9 @@
 :root {
-    --game-update-cycle: 100ms;
+    --pacman-update-cycle: 175ms;
+    --ghost-update-cycle: 300ms;
 
     --tile-size: 20px;
-    --pacman-tiles-per-cycle: .75;
-    --ghost-tiles-per-cycle: .5;
+    --game-actors-size: calc(var(--tile-size) * .65);
 
     --empty-color: black;
     --wall-color: blue;

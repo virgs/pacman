@@ -15,14 +15,14 @@ export default function Root(): JSX.Element {
 
   return (
     <InputComponent>
-      <div>
+      <div className='mx-auto' style={{ height: '100%' }}>
         <FontAwesomeIcon icon={faEnvelope} />
-        <PacmanComponent initialTilePosition={tileMap.heroOriginalPosition}></PacmanComponent>
+        <TileMapComponent tileMap={tileMap}></TileMapComponent>
         <GhostComponent initialTilePosition={tileMap.blinkyOriginalPosition} ghostIdentity={{ ghostName: GhostName.BLINKY }}></GhostComponent>
         <GhostComponent initialTilePosition={tileMap.pinkyOriginalPosition} ghostIdentity={{ ghostName: GhostName.PINKY }}></GhostComponent>
         <GhostComponent initialTilePosition={tileMap.inkyOriginalPosition} ghostIdentity={{ ghostName: GhostName.INKY }}></GhostComponent>
         <GhostComponent initialTilePosition={tileMap.clydeOriginalPosition} ghostIdentity={{ ghostName: GhostName.CLYDE }}></GhostComponent>
-        <TileMapComponent tileMap={tileMap}></TileMapComponent>
+        <PacmanComponent tileMap={tileMap}></PacmanComponent>
       </div>
     </InputComponent>
   )

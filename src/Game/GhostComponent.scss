@@ -1,7 +1,8 @@
 :root {
-    --ghost-eyes-animation-duration: calc(var(--game-update-cycle) * 4);
-    --ghost-head-stretch-animation-duration: calc(var(--game-update-cycle) * 4.3);
-    --ghost-tentacles-stretch-animation-duration: calc(var(--game-update-cycle) * 4.6);
+    // random multiplier not multiple among themselves
+    --ghost-eyes-animation-duration: calc(var(--ghost-update-cycle) * 4);
+    --ghost-head-stretch-animation-duration: calc(var(--ghost-update-cycle) * 4.3);
+    --ghost-tentacles-stretch-animation-duration: calc(var(--ghost-update-cycle) * 4.6);
 }
 
 [data-ghost-name="blinky"] {
@@ -24,8 +25,11 @@
     position: absolute;
     width: var(--tile-size);
     height: var(--tile-size);
-    left: 500px;
+}
 
+.ghost-body {
+    width: var(--game-actors-size);
+    height: var(--game-actors-size);
 }
 
 .ghost-eyes {

@@ -28,17 +28,19 @@ export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
         top: tilePosition.y * tileSize + 'px'
     })
 
-    return <div style={containerStyle} data-ghost-name={props.ghostIdentity.ghostName.toString().toLowerCase()} className='ghost-container'>
-        <div className="ghost-eyes">
-            <div></div>
-            <div></div>
-        </div>
-        <div className="ghost-top"></div>
-        <div className="ghost-bottom">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+    return <div style={containerStyle} data-ghost-name={props.ghostIdentity.ghostName.toString().toLowerCase()} className='ghost-container d-flex align-items-center'>
+        <div className="ghost-body mx-auto">
+            <div className="ghost-eyes">
+                <div></div>
+                <div></div>
+            </div>
+            <div className="ghost-top"></div>
+            <div className="ghost-bottom">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </div>
 }

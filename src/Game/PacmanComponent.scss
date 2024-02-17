@@ -2,13 +2,14 @@
     position: absolute;
     width: var(--tile-size);
     height: var(--tile-size);
-    box-shadow: 0 0 10px 0px var(--pacman-body-color);
-    border-radius: var(--tile-size);
-    transition: transform linear var(--game-update-cycle);
+    transition: all linear var(--pacman-update-cycle);
 }
 
 .pacman-body {
-    height: 100%;
+    width: var(--game-actors-size);
+    height: var(--game-actors-size);
+    box-shadow: 0 0 10px 0px var(--pacman-body-color);
+    border-radius: var(--game-actors-size);
 
     div {
         display: flex;
