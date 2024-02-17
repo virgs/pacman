@@ -34,7 +34,7 @@ export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
             data-ghost-name={props.ghostIdentity.ghostName.toString().toLowerCase()}
             className="ghost-container d-flex align-items-center"
         >
-            <div className="ghost-body mx-auto">
+            <div className="game-actor ghost-body mx-auto">
                 <div className="ghost-eyes">
                     <div></div>
                     <div></div>

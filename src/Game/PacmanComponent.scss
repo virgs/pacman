@@ -10,8 +10,6 @@
 }
 
 .pacman-body {
-    width: var(--game-actors-size);
-    height: var(--game-actors-size);
     box-shadow: 0 0 10px 0px var(--pacman-body-color);
     border-radius: var(--game-actors-size);
 

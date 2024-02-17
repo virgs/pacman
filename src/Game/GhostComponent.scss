@@ -27,10 +27,7 @@
     height: var(--tile-size);
 }
 
-.ghost-body {
-    width: var(--game-actors-size);
-    height: var(--game-actors-size);
-}
+.ghost-body {}
 
 .ghost-eyes {
     position: absolute;
@@ -73,11 +70,7 @@
 }
 
 .ghost-bottom {
-    position: relative;
     height: 20%;
-    bottom: 10%;
-    left: 0;
-    transition: left;
     display: flex;
 
     span {

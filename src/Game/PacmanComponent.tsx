@@ -115,7 +115,7 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
     }, pacmanUpdateCycle / inputWindowCycles)
     return (
         <div className="pacman-container d-flex align-items-center" style={containerStyle}>
-            <div className="pacman-body mx-auto" style={bodyStyle}>
+            <div className="game-actor pacman-body mx-auto" style={bodyStyle}>
                 <div>
                     <div className="pacman-top-left"></div>
                     <div className="pacman-top-right"></div>
