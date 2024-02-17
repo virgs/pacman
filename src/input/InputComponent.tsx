@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { emitHeroAction } from '../events/Events'
 import { Point, vectorApproximateDirection } from '../math/Point'
 import { mapInputToDirection, mapKeyToUserInput } from './Input'
-import "./InputComponent.scss"
+import './InputComponent.scss'
 
 export const InputComponent = (props: { children: JSX.Element }): JSX.Element => {
     const [pointerDownCoordinates, setPointerDownCoordinates] = useState<Point>({ x: 0, y: 0 })
@@ -40,7 +40,7 @@ export const InputComponent = (props: { children: JSX.Element }): JSX.Element =>
 
     return (
         <div
-            className='input-component'
+            className="input-component"
             ref={appRef}
             tabIndex={0}
             autoFocus
@@ -62,4 +62,3 @@ export const InputComponent = (props: { children: JSX.Element }): JSX.Element =>
         </div>
     )
 }
-

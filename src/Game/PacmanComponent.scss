@@ -1,3 +1,7 @@
+:root {
+    --eat-animation-duration: calc(var(--pacman-update-cycle) * 1.25);
+}
+
 .pacman-container {
     position: absolute;
     width: var(--tile-size);
@@ -38,7 +42,7 @@
 }
 
 .pacman-top-right::before {
-    content: " ";
+    content: ' ';
     width: 2px;
     height: 2px;
     border-radius: 100%;
@@ -62,7 +66,10 @@
     border-right-width: 1px !important;
     border-bottom-width: 1px !important;
     border-top-width: 1px !important;
-    animation: eat-animation 200ms ease infinite alternate;
+    animation-name: eat-animation;
+    animation-duration: var(--eat-animation-duration);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 @keyframes eat-animation {

@@ -1,4 +1,3 @@
-
 export enum Tile {
     WALL,
     EMPTY,
@@ -7,5 +6,5 @@ export enum Tile {
     PINKY,
     INKY,
     BLINKY,
-    CLYDE
+    CLYDE,
 }

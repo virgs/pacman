@@ -8,10 +8,11 @@ export type HeroActionEventType = {
 }
 
 export type GameActorMovedEventType = {
-    direction: Direction,
-    position: Point,
+    direction: Direction
+    position: Point
     tile: Tile
 }
 
 export const { useHeroActionListener, emitHeroAction } = createEvent('hero-action')<HeroActionEventType>()
-export const { useGameActorMovedListener, emitGameActorMoved } = createEvent('game-actor-moved')<GameActorMovedEventType>()
+export const { useGameActorMovedListener, emitGameActorMoved } =
+    createEvent('game-actor-moved')<GameActorMovedEventType>()

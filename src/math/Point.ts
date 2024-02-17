@@ -1,11 +1,11 @@
-import { Direction } from "../direction/Direction"
+import { Direction } from '../direction/Direction'
 
 export interface Point {
     x: number
     y: number
 }
 
-export const Origin: Point = { x: 0, y: 0 };
+export const Origin: Point = { x: 0, y: 0 }
 
 export type ApproximateDirectionOptions = {
     minLength: number

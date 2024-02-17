@@ -5,19 +5,19 @@
     --ghost-tentacles-stretch-animation-duration: calc(var(--ghost-update-cycle) * 4.6);
 }
 
-[data-ghost-name="blinky"] {
+[data-ghost-name='blinky'] {
     --ghost-color: var(--blinky-body-color);
 }
 
-[data-ghost-name="pinky"] {
+[data-ghost-name='pinky'] {
     --ghost-color: var(--pinky-body-color);
 }
 
-[data-ghost-name="inky"] {
+[data-ghost-name='inky'] {
     --ghost-color: var(--inky-body-color);
 }
 
-[data-ghost-name="clyde"] {
+[data-ghost-name='clyde'] {
     --ghost-color: var(--clyde-body-color);
 }
 

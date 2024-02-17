@@ -3,15 +3,15 @@
     --ghost-update-cycle: 300ms;
 
     --tile-size: 20px;
-    --game-actors-size: calc(var(--tile-size) * .65);
+    --game-actors-size: calc(var(--tile-size) * 0.65);
 
     --empty-color: black;
     --wall-color: blue;
     --pacman-body-color: #fdff00;
-    --blinky-body-color: #FF0000;
-    --pinky-body-color: #FFB8FF;
-    --inky-body-color: #00FFFF;
-    --clyde-body-color: #FFB852;
+    --blinky-body-color: #ff0000;
+    --pinky-body-color: #ffb8ff;
+    --inky-body-color: #00ffff;
+    --clyde-body-color: #ffb852;
 
     color-scheme: light dark;
     font-synthesis: none;
