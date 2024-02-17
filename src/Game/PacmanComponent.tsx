@@ -7,6 +7,7 @@ import { TileMap } from '../map/TileMap'
 import { Point } from '../math/Point'
 import './PacmanComponent.scss'
 import { Tile } from '../map/Tile'
+import { GameActorTileMover } from './GameActorTileMover'
 
 export type PacmanComponentProps = {
     tileMap: TileMap
@@ -25,6 +26,7 @@ const getHeroTransformOrientation = (direction: Direction): string => {
 }
 
 export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
+    const gameActorTileMover = new GameActorTileMover()
     const pacmanUpdateCycle = GameConfig.pacmanUpdateCycle()
     const inputWindowCycles = 5 //number of updates a change direction input will work
     const tileSize = GameConfig.tileSize()
@@ -39,56 +41,17 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
 
     useHeroActionListener((payload: HeroActionEventType) => setDirection(payload.direction))
 
-    function updatePosition() {
-        const newPosition = {
-            x: position.x,
-            y: position.y,
-        }
-        switch (direction) {
-            case Direction.UP:
-                newPosition.y -= 1 / inputWindowCycles
-                break
-            case Direction.DOWN:
-                newPosition.y += 1 / inputWindowCycles
-                break
-            case Direction.LEFT:
-                newPosition.x -= 1 / inputWindowCycles
-                break
-            case Direction.RIGHT:
-                newPosition.x += 1 / inputWindowCycles
-                break
-        }
-        const newTilePosition = {
-            x: Math.floor(newPosition.x),
-            y: Math.floor(newPosition.y),
-        }
-        let overlapped = true;
-        if (newPosition.x >= props.tileMap.dimension.x) {
-            newTilePosition.x -= props.tileMap.dimension.x
-            newPosition.x -= props.tileMap.dimension.x
-        } else if (newPosition.x <= 0) {
-            newTilePosition.x += props.tileMap.dimension.x
-            newPosition.x += props.tileMap.dimension.x
-        } else if (newPosition.y >= props.tileMap.dimension.y) {
-            newTilePosition.y -= props.tileMap.dimension.y
-            newPosition.y -= props.tileMap.dimension.y
-        } else if (newPosition.y < 0) {
-            newTilePosition.y += props.tileMap.dimension.y
-            newPosition.y += props.tileMap.dimension.y
-        } else {
-            overlapped = false
-        }
 
-        return { newTilePosition: newTilePosition, newPosition: newPosition, overlapped }
-    }
 
     useInterval(() => {
         setBodyStyle({
             transform: getHeroTransformOrientation(direction),
         })
 
-        const { newTilePosition, newPosition, overlapped } = updatePosition()
-        if (props.tileMap.getTileOfPosition(newTilePosition) !== Tile.WALL) {
+        const { newTilePosition, newPosition, overlapped } = gameActorTileMover.move(position, direction,
+            props.tileMap.dimension, 1 / inputWindowCycles)
+        const tileOfPosition = props.tileMap.getTileOfPosition(newTilePosition)
+        if (tileOfPosition !== Tile.WALL && tileOfPosition !== Tile.GHOST_CAGE_GATE) {
             const style = {
                 ...containerStyle,
             }

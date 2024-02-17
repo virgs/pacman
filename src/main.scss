@@ -23,14 +23,6 @@
 .game-actor {
     width: var(--game-actors-size);
     height: var(--game-actors-size);
-    filter: blur(10px);
-    animation: remove-blur 500ms 1 forwards;
-}
-
-@keyframes remove-blur {
-    to {
-        filter: blur(0px);
-    }
 }
 
 html {

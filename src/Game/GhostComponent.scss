@@ -3,6 +3,8 @@
     --ghost-eyes-animation-duration: calc(var(--ghost-update-cycle) * 4);
     --ghost-head-stretch-animation-duration: calc(var(--ghost-update-cycle) * 4.3);
     --ghost-tentacles-stretch-animation-duration: calc(var(--ghost-update-cycle) * 4.6);
+    --ghost-float-animation-duration: calc(var(--ghost-update-cycle) * 2.6);
+    --ghost-blur-fadein-animation-duration: calc(var(--ghost-update-cycle) * 3.7);
 }
 
 [data-ghost-name='blinky'] {
@@ -27,7 +29,24 @@
     height: var(--tile-size);
 }
 
-.ghost-body {}
+.ghost-body {
+    position: relative;
+    top: -1px;
+    filter: blur(10px);
+    animation: remove-blur var(--ghost-blur-fadein-animation-duration) forwards, ghost-float var(--ghost-float-animation-duration) infinite alternate ease-in-out;
+}
+
+@keyframes remove-blur {
+    to {
+        filter: blur(0px);
+    }
+}
+
+@keyframes ghost-float {
+    to {
+        top: 1px;
+    }
+}
 
 .ghost-eyes {
     position: absolute;
