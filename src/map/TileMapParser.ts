@@ -26,8 +26,8 @@ export class TileMapParser {
         switch (char.toUpperCase()) {
             case '#':
                 return Tile.WALL
-            case '-':
-                return Tile.GHOST_CAGE_GATE
+            case '~':
+                return Tile.GHOST_CAGE
             case '@':
                 return Tile.HERO
             case 'P':

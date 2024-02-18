@@ -44,7 +44,7 @@ export const TileMapComponent = (props: MapComponentProps): JSX.Element => {
                     left: x * tileSize,
                     top: y * tileSize,
                 }
-                walls.push(<div key={`${y}.${x}`} className="wall" style={style} />)
+                walls.push(<div key={`${y}.${x}`} data-position={`${y}.${x}`} className="wall" style={style} />)
             }
         })
     })

@@ -27,6 +27,8 @@
     position: absolute;
     width: var(--tile-size);
     height: var(--tile-size);
+    transition: all;
+    transition: all linear var(--ghost-update-cycle);
 }
 
 .ghost-body {

@@ -1,37 +1,45 @@
 import { useState } from 'react'
 import { GameConfig } from '../config'
+import { Ghost } from '../engine/Ghost'
+import { useInterval } from '../hooks/UseInterval'
 import { Point } from '../math/Point'
 import './GhostComponent.scss'
 
-export enum GhostName {
-    PINKY = 'PINKY',
-    INKY = 'INKY',
-    BLINKY = 'BLINKY',
-    CLYDE = 'CLYDE',
-}
-
-export interface GhostIdentity {
-    ghostName: GhostName
-}
-
 export type GhostComponentProps = {
-    initialTilePosition: Point
-    ghostIdentity: GhostIdentity
+    ghost: Ghost
 }
 
 export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
     const tileSize = GameConfig.getTileSizeInPixels()
+    const ghostUpdateCycle = GameConfig.getGhostUpdatePerCycleInMs();
 
-    const [tilePosition, setTilePosition] = useState<Point>(props.initialTilePosition)
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
-        left: tilePosition.x * tileSize + 'px',
-        top: tilePosition.y * tileSize + 'px',
+        left: props.ghost.currentTilePosition.x * tileSize + 'px',
+        top: props.ghost.currentTilePosition.y * tileSize + 'px',
     })
+
+    useInterval(() => {
+        const nextDirection = props.ghost.detectNextDirection();
+        const style = {
+            ...containerStyle,
+        }
+        if (nextDirection.overlapped) {
+            style.transition = 'none'
+        } else {
+            style.transition = `all linear ${ghostUpdateCycle}ms`
+        }
+        setContainerStyle({
+            ...style,
+            left: nextDirection.newTilePosition.x * tileSize + 'px',
+            top: nextDirection.newTilePosition.y * tileSize + 'px',
+        })
+        props.ghost.move(nextDirection.direction, nextDirection.newTilePosition);
+    }, ghostUpdateCycle)
 
     return (
         <div
             style={containerStyle}
-            data-ghost-name={props.ghostIdentity.ghostName.toString().toLowerCase()}
+            data-ghost-name={props.ghost.name.toString().toLowerCase()}
             className="ghost-container d-flex align-items-center"
         >
             <div className="game-actor ghost-body mx-auto">

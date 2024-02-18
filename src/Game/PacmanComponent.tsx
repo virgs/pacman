@@ -26,13 +26,14 @@ const getHeroTransformOrientation = (direction: Direction): string => {
 }
 
 export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
+    const nonWalkableTiles = [Tile.WALL, Tile.GHOST_CAGE]
     const gameActorTileMover = new GameActorTileMover()
     const pacmanUpdateCycle = GameConfig.getPacmanUpdateCycleInMs()
     const inputWindowCycles = 5 //number of updates a change direction input will work
     const tileSize = GameConfig.getTileSizeInPixels()
 
     const [direction, setDirection] = useState<Direction>(Direction.RIGHT)
-    const [position, setPosition] = useState<Point>(props.tileMap.heroOriginalPosition)
+    const [position, setPosition] = useState<Point>(props.tileMap.tilePositions.get(Tile.HERO)![0])
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
         left: position.x * tileSize + 'px',
         top: position.y * tileSize + 'px',
@@ -40,8 +41,6 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
     const [bodyStyle, setBodyStyle] = useState<React.CSSProperties>({})
 
     useHeroActionListener((payload: HeroActionEventType) => setDirection(payload.direction))
-
-
 
     useInterval(() => {
         setBodyStyle({
@@ -51,14 +50,14 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
         const { newTilePosition, newPosition, overlapped } = gameActorTileMover.move(position, direction,
             props.tileMap.dimension, 1 / inputWindowCycles)
         const tileOfPosition = props.tileMap.getTileOfPosition(newTilePosition)
-        if (tileOfPosition !== Tile.WALL && tileOfPosition !== Tile.GHOST_CAGE_GATE) {
+        if (tileOfPosition !== undefined && !nonWalkableTiles.includes(tileOfPosition)) {
             const style = {
                 ...containerStyle,
             }
             if (overlapped) {
                 style.transition = 'none'
             } else {
-                style.transition = 'all linear var(--pacman-update-cycle)'
+                style.transition = `all linear ${pacmanUpdateCycle}ms`
             }
             setContainerStyle({
                 ...style,

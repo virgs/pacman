@@ -45,3 +45,26 @@ export const vectorApproximateDirection = (
     else if (positiveRoundedValue > 270 - tolerance && positiveRoundedValue < 270 + tolerance) return Direction.UP
     return undefined
 }
+
+export const moveTowardsDirection = (position: Point, direction: Direction, moveStep: number = 1): Point => {
+    const newPosition = {
+        x: position.x,
+        y: position.y,
+    };
+
+    switch (direction) {
+        case Direction.UP:
+            newPosition.y -= moveStep;
+            break;
+        case Direction.DOWN:
+            newPosition.y += moveStep;
+            break;
+        case Direction.LEFT:
+            newPosition.x -= moveStep;
+            break;
+        case Direction.RIGHT:
+            newPosition.x += moveStep;
+            break;
+    }
+    return newPosition;
+}

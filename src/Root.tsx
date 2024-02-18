@@ -1,40 +1,30 @@
-import { InputComponent } from './input/InputComponent'
 import { PacmanComponent } from './game/PacmanComponent'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { InputComponent } from './input/InputComponent'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import './Root.scss'
-import { GhostComponent, GhostName } from './game/GhostComponent'
-import { TileMapParser } from './map/TileMapParser'
-import { TileMap } from './map/TileMap'
+import { GhostFactory } from './engine/GhostFactory'
+import { GhostComponent } from './game/GhostComponent'
 import { TileMapComponent } from './game/TileMapComponent'
+import { GhostTiles } from './map/Tile'
+import { TileMap } from './map/TileMap'
+import { TileMapParser } from './map/TileMapParser'
 
 const tiles = await new TileMapParser().parse()
 const tileMap = new TileMap(tiles)
 
 export default function Root(): JSX.Element {
+  const ghostFactory = new GhostFactory(tileMap)
+  const ghosts = GhostTiles
+    .map(ghostTile => <GhostComponent ghost={ghostFactory.createGhost(ghostTile)} />)
 
   return (
     <InputComponent>
       <div className="mx-auto" style={{ height: '100%' }}>
         {/* <FontAwesomeIcon icon={faEnvelope} /> */}
         <TileMapComponent tileMap={tileMap}></TileMapComponent>
-        <GhostComponent
-          initialTilePosition={tileMap.blinkyOriginalPosition}
-          ghostIdentity={{ ghostName: GhostName.BLINKY }}
-        ></GhostComponent>
-        <GhostComponent
-          initialTilePosition={tileMap.pinkyOriginalPosition}
-          ghostIdentity={{ ghostName: GhostName.PINKY }}
-        ></GhostComponent>
-        <GhostComponent
-          initialTilePosition={tileMap.inkyOriginalPosition}
-          ghostIdentity={{ ghostName: GhostName.INKY }}
-        ></GhostComponent>
-        <GhostComponent
-          initialTilePosition={tileMap.clydeOriginalPosition}
-          ghostIdentity={{ ghostName: GhostName.CLYDE }}
-        ></GhostComponent>
-        <PacmanComponent tileMap={tileMap}></PacmanComponent>
+        {...ghosts}
+        <PacmanComponent tileMap={tileMap} />
       </div>
     </InputComponent>
   )
