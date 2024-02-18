@@ -27,9 +27,9 @@ const getHeroTransformOrientation = (direction: Direction): string => {
 
 export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
     const gameActorTileMover = new GameActorTileMover()
-    const pacmanUpdateCycle = GameConfig.pacmanUpdateCycle()
+    const pacmanUpdateCycle = GameConfig.getPacmanUpdateCycleInMs()
     const inputWindowCycles = 5 //number of updates a change direction input will work
-    const tileSize = GameConfig.tileSize()
+    const tileSize = GameConfig.getTileSizeInPixels()
 
     const [direction, setDirection] = useState<Direction>(Direction.RIGHT)
     const [position, setPosition] = useState<Point>(props.tileMap.heroOriginalPosition)

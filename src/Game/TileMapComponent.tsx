@@ -33,7 +33,7 @@ function borderStyle(tileMap: TileMap, x: number, y: number) {
 }
 
 export const TileMapComponent = (props: MapComponentProps): JSX.Element => {
-    const tileSize = GameConfig.tileSize()
+    const tileSize = GameConfig.getTileSizeInPixels()
 
     const walls: JSX.Element[] = []
     props.tileMap.map.forEach((line, y) => {
@@ -44,7 +44,6 @@ export const TileMapComponent = (props: MapComponentProps): JSX.Element => {
                     left: x * tileSize,
                     top: y * tileSize,
                 }
-
                 walls.push(<div key={`${y}.${x}`} className="wall" style={style} />)
             }
         })

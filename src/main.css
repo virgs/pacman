@@ -2,7 +2,7 @@
     --pacman-update-cycle: 175ms;
     --ghost-update-cycle: 300ms;
 
-    --tile-size: 20px;
+    --tile-size: calc(min(22.5px, calc(100svmin/25)));
     --game-actors-size: calc(var(--tile-size) * 0.65);
 
     --empty-color: black;

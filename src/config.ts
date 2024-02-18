@@ -1,19 +1,21 @@
+import "./config.scss"
+
+const tileSizeCalculator = document.createElement('div');
+tileSizeCalculator.id = 'tile-size-calculator';
+document.body.append(tileSizeCalculator);
+
 export const GameConfig = {
-    tileSize: () =>
+    getTileSizeInPixels: () =>
+        Number(document.getElementById('tile-size-calculator')?.getBoundingClientRect().width),
+    getPacmanUpdateCycleInMs: () =>
         Number(
-            getComputedStyle(document.body)
-                .getPropertyValue('--tile-size')
-                .replace(/[^0-9]*/g, '')
-        ),
-    pacmanUpdateCycle: () =>
-        Number(
-            getComputedStyle(document.body)
+            getComputedStyle(document.documentElement)
                 .getPropertyValue('--pacman-update-cycle')
                 .replace(/[^0-9]*/g, '')
         ),
-    ghostUpdatePerCycle: () =>
+    getGhostUpdatePerCycleInMs: () =>
         Number(
-            getComputedStyle(document.body)
+            getComputedStyle(document.documentElement)
                 .getPropertyValue('--ghost-update-cycle')
                 .replace(/[^0-9]*/g, '')
         ),

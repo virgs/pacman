@@ -20,7 +20,7 @@ export type GhostComponentProps = {
 }
 
 export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
-    const tileSize = GameConfig.tileSize()
+    const tileSize = GameConfig.getTileSizeInPixels()
 
     const [tilePosition, setTilePosition] = useState<Point>(props.initialTilePosition)
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
