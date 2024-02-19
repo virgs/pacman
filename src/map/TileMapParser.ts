@@ -27,9 +27,9 @@ export class TileMapParser {
             case '#':
                 return Tile.WALL
             case '~':
-                return Tile.GHOST_CAGE
+                return Tile.GHOST_HOUSE
             case '@':
-                return Tile.HERO
+                return Tile.PACMAN
             case 'P':
                 return Tile.PINKY
             case 'B':

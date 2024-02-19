@@ -10,7 +10,7 @@ export const getAdjacentDirections = (direction: Direction): Direction[] => {
     switch (direction) {
         case Direction.UP:
         case Direction.DOWN:
-            return [Direction.LEFT, Direction.RIGHT]
+            return [Direction.RIGHT, Direction.LEFT]
         case Direction.LEFT:
         case Direction.RIGHT:
             return [Direction.UP, Direction.DOWN]
@@ -19,9 +19,9 @@ export const getAdjacentDirections = (direction: Direction): Direction[] => {
 export const getOppositeDirection = (direction: Direction): Direction => {
     switch (direction) {
         case Direction.UP:
-            return Direction.DOWN;
+            return Direction.DOWN
         case Direction.DOWN:
-            return Direction.UP;
+            return Direction.UP
         case Direction.LEFT:
             return Direction.RIGHT
         case Direction.RIGHT:

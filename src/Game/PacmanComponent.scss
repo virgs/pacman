@@ -1,5 +1,5 @@
 :root {
-    --eat-animation-duration: calc(var(--pacman-update-cycle) * 1.25);
+    --eat-animation-duration: calc(var(--pacman-update-cycle) * 0.75);
 }
 
 .pacman-container {

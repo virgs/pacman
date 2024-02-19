@@ -1,15 +1,19 @@
-import { Direction } from "../direction/Direction";
-import { Point } from "../math/Point";
+import { Direction } from '../direction/Direction'
+import { Point } from '../math/Point'
 
 type GameActorTileMoverResult = {
-    newTilePosition: Point;
-    newPosition: Point;
+    newTilePosition: Point
+    newPosition: Point
     overlapped: boolean
 }
 
 export class GameActorTileMover {
-
-    public move(position: Point, direction: Direction, mapDimension: Point, step: number = 1): GameActorTileMoverResult {
+    public move(
+        position: Point,
+        direction: Direction,
+        mapDimension: Point,
+        step: number = 1
+    ): GameActorTileMoverResult {
         const newPosition = {
             x: position.x,
             y: position.y,
@@ -32,7 +36,7 @@ export class GameActorTileMover {
             x: Math.floor(newPosition.x),
             y: Math.floor(newPosition.y),
         }
-        let overlapped = true;
+        let overlapped = true
         if (newPosition.x >= mapDimension.x) {
             newTilePosition.x -= mapDimension.x
             newPosition.x -= mapDimension.x

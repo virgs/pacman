@@ -11,7 +11,7 @@ export class TileMap {
             y: map.length,
             x: map[0].length,
         }
-        this._tilePositions = this.buildTilePositions(map);
+        this._tilePositions = this.buildTilePositions(map)
         this._map = this.removeDynamicTiles(map)
     }
 
@@ -38,25 +38,27 @@ export class TileMap {
     }
 
     public buildTilePositions(map: Tile[][]): Map<Tile, Point[]> {
-        const result: Map<Tile, Point[]> = new Map();
+        const result: Map<Tile, Point[]> = new Map()
         map.forEach((line, y) => {
             line.forEach((tile, x) => {
                 result.get(tile)?.push({ x, y }) ?? result.set(tile, [{ x, y }])
             })
         })
-        return result;
+        return result
     }
 
     private removeDynamicTiles(map: Tile[][]): Tile[][] {
         return map.map((line, y) =>
             line.map((tile, x) => {
-                if (tile === Tile.HERO) {
-                    this._tilePositions.get(Tile.EMPTY)?.push({ x, y }) ?? this._tilePositions.set(Tile.EMPTY, [{ x, y }])
+                if (tile === Tile.PACMAN) {
+                    this._tilePositions.get(Tile.EMPTY)?.push({ x, y }) ??
+                        this._tilePositions.set(Tile.EMPTY, [{ x, y }])
                     return Tile.EMPTY
                 }
                 if (GhostTiles.includes(tile)) {
-                    this._tilePositions.get(Tile.GHOST_CAGE)?.push({ x, y }) ?? this._tilePositions.set(Tile.GHOST_CAGE, [{ x, y }])
-                    return Tile.GHOST_CAGE
+                    this._tilePositions.get(Tile.GHOST_HOUSE)?.push({ x, y }) ??
+                        this._tilePositions.set(Tile.GHOST_HOUSE, [{ x, y }])
+                    return Tile.GHOST_HOUSE
                 }
                 return tile
             })

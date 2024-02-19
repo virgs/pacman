@@ -1,8 +1,8 @@
 export enum Tile {
     WALL,
     EMPTY,
-    GHOST_CAGE,
-    HERO,
+    GHOST_HOUSE,
+    PACMAN,
     PINKY,
     INKY,
     BLINKY,

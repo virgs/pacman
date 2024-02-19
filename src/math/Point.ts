@@ -18,6 +18,13 @@ export const pointsAreEqual = (a?: Point, b?: Point): boolean => {
     }
     return a.x === b.x && a.y === b.y
 }
+export const subtractPoints = (a: Point, b: Point): Point => {
+    return { x: a.x - b.x, y: a.y - b.y }
+}
+
+export const sumPoints = (a: Point, b: Point): Point => {
+    return { x: a.x + b.x, y: a.y + b.y }
+}
 
 export const squaredDistanceBetweenPoints = (a: Point, b: Point): number => {
     return (a.x - b.x) ** 2 + (a.y - b.y) ** 2
@@ -50,21 +57,21 @@ export const moveTowardsDirection = (position: Point, direction: Direction, move
     const newPosition = {
         x: position.x,
         y: position.y,
-    };
+    }
 
     switch (direction) {
         case Direction.UP:
-            newPosition.y -= moveStep;
-            break;
+            newPosition.y -= moveStep
+            break
         case Direction.DOWN:
-            newPosition.y += moveStep;
-            break;
+            newPosition.y += moveStep
+            break
         case Direction.LEFT:
-            newPosition.x -= moveStep;
-            break;
+            newPosition.x -= moveStep
+            break
         case Direction.RIGHT:
-            newPosition.x += moveStep;
-            break;
+            newPosition.x += moveStep
+            break
     }
-    return newPosition;
+    return newPosition
 }

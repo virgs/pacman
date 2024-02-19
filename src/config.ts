@@ -1,12 +1,11 @@
-import "./config.scss"
+import './config.scss'
 
-const tileSizeCalculator = document.createElement('div');
-tileSizeCalculator.id = 'tile-size-calculator';
-document.body.append(tileSizeCalculator);
+const tileSizeCalculator = document.createElement('div')
+tileSizeCalculator.id = 'tile-size-calculator'
+document.body.append(tileSizeCalculator)
 
 export const GameConfig = {
-    getTileSizeInPixels: () =>
-        Number(document.getElementById('tile-size-calculator')?.getBoundingClientRect().width),
+    getTileSizeInPixels: () => Number(document.getElementById('tile-size-calculator')?.getBoundingClientRect().width),
     getPacmanUpdateCycleInMs: () =>
         Number(
             getComputedStyle(document.documentElement)

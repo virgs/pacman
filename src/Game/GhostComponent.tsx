@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { GameConfig } from '../config'
-import { Ghost } from '../engine/Ghost'
+import { Ghost } from '../engine/ghosts/Ghost'
 import { useInterval } from '../hooks/UseInterval'
 import { Point } from '../math/Point'
 import './GhostComponent.scss'
@@ -11,7 +11,7 @@ export type GhostComponentProps = {
 
 export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
     const tileSize = GameConfig.getTileSizeInPixels()
-    const ghostUpdateCycle = GameConfig.getGhostUpdatePerCycleInMs();
+    const ghostUpdateCycle = GameConfig.getGhostUpdatePerCycleInMs()
 
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
         left: props.ghost.currentTilePosition.x * tileSize + 'px',
@@ -19,7 +19,7 @@ export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
     })
 
     useInterval(() => {
-        const nextDirection = props.ghost.detectNextDirection();
+        const nextDirection = props.ghost.detectNextDirection()
         const style = {
             ...containerStyle,
         }
@@ -33,7 +33,7 @@ export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
             left: nextDirection.newTilePosition.x * tileSize + 'px',
             top: nextDirection.newTilePosition.y * tileSize + 'px',
         })
-        props.ghost.move(nextDirection.direction, nextDirection.newTilePosition);
+        props.ghost.move(nextDirection.direction, nextDirection.newTilePosition)
     }, ghostUpdateCycle)
 
     return (
