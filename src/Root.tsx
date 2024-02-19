@@ -9,6 +9,7 @@ import { TileMapComponent } from './game/TileMapComponent'
 import { GhostTiles } from './map/Tile'
 import { TileMap } from './map/TileMap'
 import { TileMapParser } from './map/TileMapParser'
+import { Pacman } from './engine/Pacman'
 
 const tiles = await new TileMapParser().parse()
 const tileMap = new TileMap(tiles)
@@ -25,7 +26,7 @@ export default function Root(): JSX.Element {
                 {/* <FontAwesomeIcon icon={faEnvelope} /> */}
                 <TileMapComponent tileMap={tileMap}></TileMapComponent>
                 {...ghosts}
-                <PacmanComponent tileMap={tileMap} />
+                <PacmanComponent pacman={new Pacman(tileMap)} />
             </div>
         </InputComponent>
     )

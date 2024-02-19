@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { GameConfig } from '../config'
 import { Ghost } from '../engine/ghosts/Ghost'
 import { useInterval } from '../hooks/UseInterval'
-import { Point } from '../math/Point'
 import './GhostComponent.scss'
 
 export type GhostComponentProps = {
@@ -14,8 +13,8 @@ export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
     const ghostUpdateCycle = GameConfig.getGhostUpdatePerCycleInMs()
 
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
-        left: props.ghost.currentTilePosition.x * tileSize + 'px',
-        top: props.ghost.currentTilePosition.y * tileSize + 'px',
+        left: props.ghost.position.x * tileSize + 'px',
+        top: props.ghost.position.y * tileSize + 'px',
     })
 
     useInterval(() => {

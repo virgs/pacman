@@ -1,16 +1,14 @@
 import { useState } from 'react'
 import { GameConfig } from '../config'
 import { Direction } from '../direction/Direction'
-import { HeroActionEventType, emitGameActorMoved, useHeroActionListener } from '../events/Events'
+import { Pacman } from '../engine/Pacman'
+import { emitGameActorMoved } from '../events/Events'
 import { useInterval } from '../hooks/UseInterval'
-import { TileMap } from '../map/TileMap'
-import { Point } from '../math/Point'
-import './PacmanComponent.scss'
 import { Tile } from '../map/Tile'
-import { GameActorTileMover } from './GameActorTileMover'
+import './PacmanComponent.scss'
 
 export type PacmanComponentProps = {
-    tileMap: TileMap
+    pacman: Pacman
 }
 
 const getHeroTransformOrientation = (direction: Direction): string => {
@@ -26,55 +24,37 @@ const getHeroTransformOrientation = (direction: Direction): string => {
 }
 
 export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
-    const nonWalkableTiles = [Tile.WALL, Tile.GHOST_HOUSE]
-    const gameActorTileMover = new GameActorTileMover()
     const pacmanUpdateCycle = GameConfig.getPacmanUpdateCycleInMs()
     const inputWindowCycles = 5 //number of updates a change direction input will work
     const tileSize = GameConfig.getTileSizeInPixels()
 
-    const [direction, setDirection] = useState<Direction>(Direction.RIGHT)
-    const [position, setPosition] = useState<Point>(props.tileMap.tilePositions.get(Tile.PACMAN)![0])
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
-        left: position.x * tileSize + 'px',
-        top: position.y * tileSize + 'px',
+        left: props.pacman.position.x * tileSize + 'px',
+        top: props.pacman.position.y * tileSize + 'px',
     })
     const [bodyStyle, setBodyStyle] = useState<React.CSSProperties>({})
 
-    useHeroActionListener((payload: HeroActionEventType) => setDirection(payload.direction))
-
     useInterval(() => {
         setBodyStyle({
-            transform: getHeroTransformOrientation(direction),
+            transform: getHeroTransformOrientation(props.pacman.direction),
         })
 
-        const { newTilePosition, newPosition, overlapped } = gameActorTileMover.move(
-            position,
-            direction,
-            props.tileMap.dimension,
-            1 / inputWindowCycles
-        )
-        const tileOfPosition = props.tileMap.getTileOfPosition(newTilePosition)
-        if (tileOfPosition !== undefined && !nonWalkableTiles.includes(tileOfPosition)) {
+        const tryResult = props.pacman.tryToMove(props.pacman.direction, 1 / inputWindowCycles)
+        if (tryResult.success) {
             const style = {
                 ...containerStyle,
             }
-            if (overlapped) {
+            if (tryResult.overlapped) {
                 style.transition = 'none'
             } else {
                 style.transition = `all linear ${pacmanUpdateCycle}ms`
             }
             setContainerStyle({
                 ...style,
-                left: newTilePosition.x * tileSize + 'px',
-                top: newTilePosition.y * tileSize + 'px',
+                left: tryResult.newTilePosition.x * tileSize + 'px',
+                top: tryResult.newTilePosition.y * tileSize + 'px',
             })
-            if (
-                Math.floor(newPosition.x) !== Math.floor(position.x) ||
-                Math.floor(newPosition.y) !== Math.floor(position.y)
-            ) {
-                emitGameActorMoved({ tile: Tile.PACMAN, position: newTilePosition, direction: direction })
-            }
-            setPosition(newPosition)
+            props.pacman.move(tryResult.direction, tryResult.newPosition)
         }
     }, pacmanUpdateCycle / inputWindowCycles)
     return (

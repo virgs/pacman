@@ -21,7 +21,7 @@ export class ClydeGhost extends Ghost {
                 }
                 const squaredDistanceToPacman = squaredDistanceBetweenPoints(
                     this.pacmanPosition,
-                    this._currentTilePosition
+                    this._position
                 )
                 if (squaredDistanceToPacman < ClydeGhost.MIN_TILES_AWAY_FROM_PACMAN_SQUARED) {
                     this._targetTilePosition = this.ghostCorner

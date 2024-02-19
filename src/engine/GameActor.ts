@@ -15,32 +15,33 @@ export type TryToMoResult = {
 export abstract class GameActor {
     protected readonly nonWalkableTiles: Tile[]
     protected readonly tileMap: TileMap
-    protected readonly moveStep: number
-    protected readonly _actor: Tile
-    protected _currentTilePosition: Point
-    protected _currentDirection: Direction
+    protected readonly _actorTile: Tile
+    protected _direction: Direction
+    protected _position: Point
 
     public constructor(
         actor: Tile,
         tileMap: TileMap,
         currentTilePosition: Point,
         nonWalkableTiles: Tile[] = [Tile.WALL],
-        moveStep: number = 1
     ) {
         this.nonWalkableTiles = nonWalkableTiles
         this.tileMap = tileMap
-        this._actor = actor
-        this._currentTilePosition = currentTilePosition
-        this._currentDirection = Direction.RIGHT
-        this.moveStep = moveStep
+        this._actorTile = actor
+        this._position = currentTilePosition
+        this._direction = Direction.RIGHT
     }
 
-    public get currentTilePosition(): Point {
-        return this._currentTilePosition
+    public get position(): Point {
+        return this._position
     }
 
-    public tryToMove(direction: Direction): TryToMoResult {
-        const newPosition = moveTowardsDirection(this._currentTilePosition, direction, 1)
+    public get direction(): Direction {
+        return this._direction
+    }
+
+    public tryToMove(direction: Direction, moveStep: number = 1): TryToMoResult {
+        const newPosition = moveTowardsDirection(this._position, direction, moveStep)
         const newTilePosition = {
             x: Math.floor(newPosition.x),
             y: Math.floor(newPosition.y),
@@ -66,13 +67,13 @@ export abstract class GameActor {
         return { newTilePosition: newTilePosition, newPosition: newPosition, overlapped, success, direction }
     }
 
-    public move(direction: Direction, newTilePosition: Point) {
-        this._currentDirection = direction
-        this._currentTilePosition = newTilePosition
+    public move(direction: Direction, position: Point) {
+        this._direction = direction
+        this._position = position
         emitGameActorMoved({
-            direction: this._currentDirection,
-            position: this._currentTilePosition,
-            tile: this._actor,
+            direction: this._direction,
+            position: this._position,
+            tile: this._actorTile,
         })
     }
 }

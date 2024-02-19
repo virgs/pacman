@@ -30,11 +30,11 @@ export abstract class Ghost extends GameActor {
 
     public detectNextDirection(): TryToMoResult {
         const possibleDirections = [
-            this.tryToMove(this._currentDirection),
-            ...getAdjacentDirections(this._currentDirection).map((direction) => this.tryToMove(direction)),
+            this.tryToMove(this._direction),
+            ...getAdjacentDirections(this._direction).map((direction) => this.tryToMove(direction)),
         ].filter((result) => result.success)
 
-        if (this.tileMap.getTileOfPosition(this.currentTilePosition) === Tile.GHOST_HOUSE) {
+        if (this.tileMap.getTileOfPosition(this.position) === Tile.GHOST_HOUSE) {
             const wayOutOfGhostHouse = possibleDirections.find(
                 (result) => this.tileMap.getTileOfPosition(result.newTilePosition) !== Tile.GHOST_HOUSE
             )
@@ -54,6 +54,6 @@ export abstract class Ghost extends GameActor {
         if (firstOption) {
             return firstOption
         }
-        return this.tryToMove(getOppositeDirection(this._currentDirection))
+        return this.tryToMove(getOppositeDirection(this._direction))
     }
 }
