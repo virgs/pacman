@@ -1,4 +1,5 @@
-import { getAdjacentDirections, getOppositeDirection } from '../../direction/Direction'
+import { Direction, getAdjacentDirections, getOppositeDirection } from '../../direction/Direction'
+import { useGhostStateChangedListener } from '../../events/Events'
 import { GhostTiles, Tile } from '../../map/Tile'
 import { TileMap } from '../../map/TileMap'
 import { Point, squaredDistanceBetweenPoints } from '../../math/Point'
@@ -18,6 +19,12 @@ export abstract class Ghost extends GameActor {
         this._ghostState = GhostState.CHASE
         this._name = Tile[ghostTile]
         this._targetTilePosition = initialPosition
+        useGhostStateChangedListener(payload => {
+            if (payload.state !== GhostState.EATEN) {
+                this._direction = getOppositeDirection(this.direction);
+            }
+            this._ghostState = payload.state
+        })
     }
 
     public get name(): string {
@@ -30,8 +37,8 @@ export abstract class Ghost extends GameActor {
 
     public detectNextDirection(): TryToMoResult {
         const possibleDirections = [
-            this.tryToMove(this._direction),
-            ...getAdjacentDirections(this._direction).map((direction) => this.tryToMove(direction)),
+            this.tryToMoveToDirection(this._direction),
+            ...getAdjacentDirections(this._direction).map((direction) => this.tryToMoveToDirection(direction)),
         ].filter((result) => result.success &&
             // Can't enter into ghost house unless in EATEN state
             !(this.ghostState !== GhostState.EATEN && this.tileMap.getTileOfPosition(this.position) !== Tile.GHOST_HOUSE && this.tileMap.getTileOfPosition(result.newTilePosition) === Tile.GHOST_HOUSE))
@@ -56,6 +63,6 @@ export abstract class Ghost extends GameActor {
         if (firstOption) {
             return firstOption
         }
-        return this.tryToMove(getOppositeDirection(this._direction))
+        return this.tryToMoveToDirection(getOppositeDirection(this._direction))
     }
 }

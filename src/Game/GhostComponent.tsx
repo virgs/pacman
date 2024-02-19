@@ -3,6 +3,7 @@ import { GameConfig } from '../config'
 import { Ghost } from '../engine/ghosts/Ghost'
 import { useInterval } from '../hooks/UseInterval'
 import './GhostComponent.scss'
+import { Direction } from '../direction/Direction'
 
 export type GhostComponentProps = {
     ghost: Ghost
@@ -18,21 +19,21 @@ export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
     })
 
     useInterval(() => {
-        const nextDirection = props.ghost.detectNextDirection()
+        const result = props.ghost.detectNextDirection()
         const style = {
             ...containerStyle,
         }
-        if (nextDirection.overlapped) {
+        if (result.overlapped) {
             style.transition = 'none'
         } else {
             style.transition = `all linear ${ghostUpdateCycle}ms`
         }
         setContainerStyle({
             ...style,
-            left: nextDirection.newTilePosition.x * tileSize + 'px',
-            top: nextDirection.newTilePosition.y * tileSize + 'px',
+            left: result.newTilePosition.x * tileSize + 'px',
+            top: result.newTilePosition.y * tileSize + 'px',
         })
-        props.ghost.move(nextDirection.direction, nextDirection.newTilePosition)
+        props.ghost.move(result.direction, result.newTilePosition)
     }, ghostUpdateCycle)
 
     return (

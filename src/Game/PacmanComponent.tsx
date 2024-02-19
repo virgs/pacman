@@ -35,11 +35,7 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
     const [bodyStyle, setBodyStyle] = useState<React.CSSProperties>({})
 
     useInterval(() => {
-        setBodyStyle({
-            transform: getHeroTransformOrientation(props.pacman.direction),
-        })
-
-        const tryResult = props.pacman.tryToMove(props.pacman.direction, 1 / inputWindowCycles)
+        const tryResult = props.pacman.tryToMoveToDirection(props.pacman.direction, 1 / inputWindowCycles)
         if (tryResult.success) {
             const style = {
                 ...containerStyle,
@@ -56,6 +52,10 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
             })
             props.pacman.move(tryResult.direction, tryResult.newPosition)
         }
+        setBodyStyle({
+            transform: getHeroTransformOrientation(props.pacman.direction),
+        })
+
     }, pacmanUpdateCycle / inputWindowCycles)
     return (
         <div className="pacman-container d-flex align-items-center" style={containerStyle}>
