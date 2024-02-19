@@ -32,7 +32,9 @@ export abstract class Ghost extends GameActor {
         const possibleDirections = [
             this.tryToMove(this._direction),
             ...getAdjacentDirections(this._direction).map((direction) => this.tryToMove(direction)),
-        ].filter((result) => result.success)
+        ].filter((result) => result.success &&
+            // Can't enter into ghost house unless in EATEN state
+            !(this.ghostState !== GhostState.EATEN && this.tileMap.getTileOfPosition(this.position) !== Tile.GHOST_HOUSE && this.tileMap.getTileOfPosition(result.newTilePosition) === Tile.GHOST_HOUSE))
 
         if (this.tileMap.getTileOfPosition(this.position) === Tile.GHOST_HOUSE) {
             const wayOutOfGhostHouse = possibleDirections.find(
