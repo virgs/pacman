@@ -5,7 +5,6 @@ import { TileMap } from '../map/TileMap'
 import { Point, moveTowardsDirection } from '../math/Point'
 
 export type TryToMoveResult = {
-    newTilePosition: Point
     newPosition: Point
     overlapped: boolean
     success: boolean
@@ -42,29 +41,21 @@ export abstract class GameActor {
 
     public tryToMoveToDirection(direction: Direction): TryToMoveResult {
         const newPosition = moveTowardsDirection(this._position, direction)
-        const newTilePosition = {
-            x: Math.floor(newPosition.x),
-            y: Math.floor(newPosition.y),
-        }
         let overlapped = true
         if (newPosition.x >= this.tileMap.dimension.x) {
-            newTilePosition.x -= this.tileMap.dimension.x
             newPosition.x -= this.tileMap.dimension.x
-        } else if (newPosition.x <= 0) {
-            newTilePosition.x += this.tileMap.dimension.x
+        } else if (newPosition.x < 0) {
             newPosition.x += this.tileMap.dimension.x
         } else if (newPosition.y >= this.tileMap.dimension.y) {
-            newTilePosition.y -= this.tileMap.dimension.y
             newPosition.y -= this.tileMap.dimension.y
         } else if (newPosition.y < 0) {
-            newTilePosition.y += this.tileMap.dimension.y
             newPosition.y += this.tileMap.dimension.y
         } else {
             overlapped = false
         }
-        const tileOfPosition = this.tileMap.getTileOfPosition(newTilePosition)
+        const tileOfPosition = this.tileMap.getTileOfPosition(newPosition)
         const success = tileOfPosition !== undefined && !this.nonWalkableTiles.includes(tileOfPosition)
-        return { newTilePosition: newTilePosition, newPosition: newPosition, overlapped, success, direction }
+        return { newPosition: newPosition, overlapped, success, direction }
     }
 
     public move(direction: Direction, position: Point) {

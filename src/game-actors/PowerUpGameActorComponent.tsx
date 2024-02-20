@@ -3,14 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import { GameConfig } from '../config'
 import { PowerUpManager } from '../engine/PowerUpManager'
-import './PowerUpComponent.scss'
+import './PowerUpGameActorComponent.scss'
 import { usePowerUpPositionedListener } from '../events/Events'
 
-type PowerUpComponentProps = {
+type Props = {
     powerUpManager: PowerUpManager
 }
 
-export const PowerUpComponent = (props: PowerUpComponentProps): JSX.Element => {
+export const PowerUpGameActorComponent = (props: Props): JSX.Element => {
     const tileSize = GameConfig.getTileSizeInPixels()
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
         left: props.powerUpManager.position.x * tileSize + 'px',
@@ -25,7 +25,7 @@ export const PowerUpComponent = (props: PowerUpComponentProps): JSX.Element => {
     })
 
     return (
-        <div className="power-up-container d-flex align-items-center" style={containerStyle}>
+        <div className="power-up-game-actor d-flex align-items-center" style={containerStyle}>
             <FontAwesomeIcon icon={faLemon} className="power-up-body fa-beat mx-auto" />
         </div>
     )

@@ -128,13 +128,13 @@ export abstract class Ghost extends GameActor {
                 !(
                     !this.dead &&
                     this.tileMap.getTileOfPosition(this.position) !== Tile.GHOST_HOUSE &&
-                    this.tileMap.getTileOfPosition(result.newTilePosition) === Tile.GHOST_HOUSE
+                    this.tileMap.getTileOfPosition(result.newPosition) === Tile.GHOST_HOUSE
                 )
         )
 
         if (this.tileMap.getTileOfPosition(this.position) === Tile.GHOST_HOUSE) {
             const wayOutOfGhostHouse = possibleDirections.find(
-                (result) => this.tileMap.getTileOfPosition(result.newTilePosition) !== Tile.GHOST_HOUSE
+                (result) => this.tileMap.getTileOfPosition(result.newPosition) !== Tile.GHOST_HOUSE
             )
             if (wayOutOfGhostHouse) {
                 return [wayOutOfGhostHouse]

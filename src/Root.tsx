@@ -4,9 +4,9 @@ import { MapStateWavesManager } from './engine/MapStateWavesManager'
 import { Pacman } from './engine/Pacman'
 import { PowerUpManager } from './engine/PowerUpManager'
 import { GhostFactory } from './engine/ghosts/GhostFactory'
-import { GhostGameActorComponent } from './game-components/GhostGameActorComponent'
-import { PacmanComponent } from './game-components/PacmanComponent'
-import { PowerUpComponent } from './game-components/PowerUpComponent'
+import { GhostGameActorComponent } from './game-actors/GhostGameActorComponent'
+import { PacmanComponent } from './game-actors/PacmanComponent'
+import { PowerUpGameActorComponent } from './game-actors/PowerUpGameActorComponent'
 import { TileMapComponent } from './components/TileMapComponent'
 import { InputComponent } from './input/InputComponent'
 import { GhostTiles } from './map/Tile'
@@ -33,7 +33,7 @@ export default function Root(): JSX.Element {
                 <TileMapComponent tileMap={tileMap} />
                 {...ghosts}
                 <PacmanComponent pacman={new Pacman(tileMap)} />
-                <PowerUpComponent powerUpManager={powerUpManager} />
+                <PowerUpGameActorComponent powerUpManager={powerUpManager} />
             </div>
         </InputComponent>
     )

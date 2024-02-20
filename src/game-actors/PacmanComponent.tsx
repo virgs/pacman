@@ -23,7 +23,6 @@ const getHeroTransformOrientation = (direction: Direction): string => {
 
 export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
     const pacmanUpdateCycle = GameConfig.getPacmanUpdateCycleInMs()
-    const inputWindowCycles = 5 //number of updates a change direction input will work
     const tileSize = GameConfig.getTileSizeInPixels()
 
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
@@ -45,8 +44,8 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
             }
             setContainerStyle({
                 ...style,
-                left: tryResult.newTilePosition.x * tileSize + 'px',
-                top: tryResult.newTilePosition.y * tileSize + 'px',
+                left: tryResult.newPosition.x * tileSize + 'px',
+                top: tryResult.newPosition.y * tileSize + 'px',
             })
             props.pacman.move(tryResult.direction, tryResult.newPosition)
         }

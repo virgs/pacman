@@ -36,10 +36,10 @@ export const GhostGameActorComponent = (props: Props): JSX.Element => {
         }
         setContainerStyle({
             ...style,
-            left: result.newTilePosition.x * tileSize + 'px',
-            top: result.newTilePosition.y * tileSize + 'px',
+            left: result.newPosition.x * tileSize + 'px',
+            top: result.newPosition.y * tileSize + 'px',
         })
-        props.ghost.move(result.direction, result.newTilePosition)
+        props.ghost.move(result.direction, result.newPosition)
     }, ghostUpdateCycle)
 
     return (
