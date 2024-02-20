@@ -1,8 +1,8 @@
 import { createEvent } from 'react-event-hook'
 import { Direction } from '../direction/Direction'
+import { GhostState } from '../engine/ghosts/GhostState'
 import { Tile } from '../map/Tile'
 import { Point } from '../math/Point'
-import { GhostState } from '../engine/ghosts/GhostState'
 
 export type HeroActionEventType = {
     direction: Direction

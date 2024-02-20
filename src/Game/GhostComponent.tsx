@@ -3,23 +3,32 @@ import { GameConfig } from '../config'
 import { Ghost } from '../engine/ghosts/Ghost'
 import { useInterval } from '../hooks/UseInterval'
 import './GhostComponent.scss'
-import { Direction } from '../direction/Direction'
+import { GhostState } from '../engine/ghosts/GhostState'
 
 export type GhostComponentProps = {
     ghost: Ghost
 }
 
 export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
+    const ghostBodyDefaultClasses = ['game-actor', 'ghost-body', 'mx-auto']
     const tileSize = GameConfig.getTileSizeInPixels()
     const ghostUpdateCycle = GameConfig.getGhostUpdatePerCycleInMs()
 
+    const [ghostBodyClasses, setGhostBodyClasses] = useState<string[]>(ghostBodyDefaultClasses)
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
         left: props.ghost.position.x * tileSize + 'px',
         top: props.ghost.position.y * tileSize + 'px',
     })
 
     useInterval(() => {
-        const result = props.ghost.detectNextDirection()
+        if (props.ghost.ghostState === GhostState.EATEN) {
+            setGhostBodyClasses([...ghostBodyDefaultClasses, 'dead-ghost'])
+        } else if (props.ghost.ghostState === GhostState.FRIGHTENED) {
+            setGhostBodyClasses([...ghostBodyDefaultClasses, 'frightened-ghost'])
+        } else {
+            setGhostBodyClasses([...ghostBodyDefaultClasses])
+        }
+        const result = props.ghost.getNextMove()
         const style = {
             ...containerStyle,
         }
@@ -42,7 +51,7 @@ export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
             data-ghost-name={props.ghost.name.toString().toLowerCase()}
             className="ghost-container d-flex align-items-center"
         >
-            <div className="game-actor ghost-body mx-auto">
+            <div className={ghostBodyClasses.join(' ')}>
                 <div className="ghost-eyes">
                     <div></div>
                     <div></div>

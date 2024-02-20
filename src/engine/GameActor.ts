@@ -4,7 +4,7 @@ import { Tile } from '../map/Tile'
 import { TileMap } from '../map/TileMap'
 import { Point, moveTowardsDirection } from '../math/Point'
 
-export type TryToMoResult = {
+export type TryToMoveResult = {
     newTilePosition: Point
     newPosition: Point
     overlapped: boolean
@@ -40,7 +40,7 @@ export abstract class GameActor {
         return this._direction
     }
 
-    public tryToMoveToDirection(direction: Direction, offset: number = 1): TryToMoResult {
+    public tryToMoveToDirection(direction: Direction, offset: number = 1): TryToMoveResult {
         const newPosition = moveTowardsDirection(this._position, direction, offset)
         const newTilePosition = {
             x: Math.floor(newPosition.x),

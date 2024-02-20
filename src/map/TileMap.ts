@@ -11,8 +11,8 @@ export class TileMap {
             y: map.length,
             x: map[0].length,
         }
-        this._tilePositions = this.buildTilePositions(map)
-        this._map = this.removeDynamicTiles(map)
+        this._tilePositions = new Map();
+        this._map = this.buildTilePositions(map)
     }
 
     public get map(): Tile[][] {
@@ -37,27 +37,20 @@ export class TileMap {
         return this.map[position.y][position.x]
     }
 
-    public buildTilePositions(map: Tile[][]): Map<Tile, Point[]> {
-        const result: Map<Tile, Point[]> = new Map()
-        map.forEach((line, y) => {
-            line.forEach((tile, x) => {
-                result.get(tile)?.push({ x, y }) ?? result.set(tile, [{ x, y }])
-            })
-        })
-        return result
-    }
-
-    private removeDynamicTiles(map: Tile[][]): Tile[][] {
+    private buildTilePositions(map: Tile[][]): Tile[][] {
         return map.map((line, y) =>
             line.map((tile, x) => {
+                const position = { x, y }
+                this._tilePositions.get(tile)?.push(position) ??
+                    this._tilePositions.set(tile, [position])
+
                 if (tile === Tile.PACMAN) {
-                    this._tilePositions.get(Tile.EMPTY)?.push({ x, y }) ??
-                        this._tilePositions.set(Tile.EMPTY, [{ x, y }])
+                    this._tilePositions.get(tile)?.push(position) ??
+                        this._tilePositions.set(Tile.EMPTY, [position])
                     return Tile.EMPTY
-                }
-                if (GhostTiles.includes(tile)) {
-                    this._tilePositions.get(Tile.GHOST_HOUSE)?.push({ x, y }) ??
-                        this._tilePositions.set(Tile.GHOST_HOUSE, [{ x, y }])
+                } else if (GhostTiles.includes(tile)) {
+                    this._tilePositions.get(tile)?.push(position) ??
+                        this._tilePositions.set(Tile.GHOST_HOUSE, [position])
                     return Tile.GHOST_HOUSE
                 }
                 return tile

@@ -12,6 +12,8 @@
     --pinky-body-color: #ffb8ff;
     --inky-body-color: #00ffff;
     --clyde-body-color: #ffb852;
+    --dead-ghost-color: transparent;
+    --frightened-ghost-color: #0052b8;
 
     color-scheme: light dark;
     font-synthesis: none;
