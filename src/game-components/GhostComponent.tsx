@@ -1,33 +1,30 @@
 import { useState } from 'react'
 import { GameConfig } from '../config'
 import { Ghost } from '../engine/ghosts/Ghost'
+import { GhostState } from '../engine/ghosts/GhostState'
 import { useInterval } from '../hooks/UseInterval'
 import './GhostComponent.scss'
-import { GhostState } from '../engine/ghosts/GhostState'
+import { StatelessGhostComponent } from './StatelessGhostComponent'
 
 export type GhostComponentProps = {
     ghost: Ghost
 }
 
 export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
-    const ghostBodyDefaultClasses = ['game-actor', 'ghost-body', 'mx-auto']
     const tileSize = GameConfig.getTileSizeInPixels()
     const ghostUpdateCycle = GameConfig.getGhostUpdatePerCycleInMs()
+    const [dead, setDead] = useState<boolean>(false);
+    const [frightened, setFrightened] = useState<boolean>(false);
 
-    const [ghostBodyClasses, setGhostBodyClasses] = useState<string[]>(ghostBodyDefaultClasses)
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
         left: props.ghost.position.x * tileSize + 'px',
         top: props.ghost.position.y * tileSize + 'px',
     })
 
     useInterval(() => {
-        if (props.ghost.dead) {
-            setGhostBodyClasses([...ghostBodyDefaultClasses, 'dead-ghost'])
-        } else if (props.ghost.ghostState === GhostState.FRIGHTENED) {
-            setGhostBodyClasses([...ghostBodyDefaultClasses, 'frightened-ghost'])
-        } else {
-            setGhostBodyClasses([...ghostBodyDefaultClasses])
-        }
+        setDead(props.ghost.dead)
+        setFrightened(props.ghost.ghostState === GhostState.FRIGHTENED)
+
         const result = props.ghost.getNextMove()
         const style = {
             ...containerStyle,
@@ -48,22 +45,12 @@ export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
     return (
         <div
             style={containerStyle}
-            data-ghost-name={props.ghost.name.toString().toLowerCase()}
             className="ghost-container d-flex align-items-center"
         >
-            <div className={ghostBodyClasses.join(' ')}>
-                <div className="ghost-eyes">
-                    <div></div>
-                    <div></div>
-                </div>
-                <div className="ghost-top"></div>
-                <div className="ghost-bottom">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
+            <StatelessGhostComponent
+                dead={dead}
+                frightened={frightened}
+                ghostName={props.ghost.name}></StatelessGhostComponent>
         </div>
     )
 }

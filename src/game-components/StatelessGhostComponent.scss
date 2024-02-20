@@ -1,0 +1,116 @@
+:root {
+    // random multiplier not multiple among themselves
+    --ghost-eyes-animation-duration: calc(var(--ghost-update-cycle) * 4);
+    --ghost-head-stretch-animation-duration: calc(var(--ghost-update-cycle) * 2.3);
+    --ghost-tentacles-stretch-animation-duration: calc(var(--ghost-update-cycle) * 2.6);
+    --ghost-float-animation-duration: calc(var(--ghost-update-cycle) * 1.6);
+    --ghost-blur-fadein-animation-duration: calc(var(--ghost-update-cycle) * 4.7);
+    --ghost-color-opacity: 1;
+}
+
+[data-ghost-name='blinky'] {
+    --ghost-color: var(--blinky-body-color);
+}
+
+[data-ghost-name='pinky'] {
+    --ghost-color: var(--pinky-body-color);
+}
+
+[data-ghost-name='inky'] {
+    --ghost-color: var(--inky-body-color);
+}
+
+[data-ghost-name='clyde'] {
+    --ghost-color: var(--clyde-body-color);
+}
+
+.dead-ghost {
+    --ghost-color-opacity: 0.1;
+}
+
+.frightened-ghost {
+    --ghost-color: var(--frightened-ghost-color);
+}
+
+.ghost-body {
+    position: relative;
+    top: -3px;
+    filter: blur(10px);
+    animation:
+        remove-blur var(--ghost-blur-fadein-animation-duration) forwards,
+        ghost-float var(--ghost-float-animation-duration) infinite alternate ease-in-out;
+}
+
+@keyframes ghost-float {
+    to {
+        top: 3px;
+    }
+}
+
+@keyframes remove-blur {
+    to {
+        filter: blur(0px);
+    }
+}
+
+.ghost-eyes {
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    width: 30%;
+    height: 20%;
+    display: flex;
+    animation: eyes-animation var(--ghost-eyes-animation-duration) ease-in-out infinite alternate;
+
+    div {
+        width: 50%;
+        border-radius: 100%;
+        background-color: var(--ghost-color);
+        box-shadow: 0 1px 2px 1px var(--ghost-color);
+    }
+}
+
+@keyframes eyes-animation {
+    to {
+        left: 45%;
+    }
+}
+
+.ghost-top {
+    height: 80%;
+    opacity: var(--ghost-color-opacity);
+    border: 1px solid var(--ghost-color);
+    border-bottom: none;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    box-shadow: 0 -1px 10px 0px var(--ghost-color);
+    transition: height;
+    animation: vertical-stretch var(--ghost-head-stretch-animation-duration) ease-in-out infinite alternate;
+}
+
+@keyframes vertical-stretch {
+    to {
+        height: 90%;
+    }
+}
+
+.ghost-bottom {
+    height: 20%;
+    display: flex;
+
+    span {
+        width: 33%;
+        height: 30%;
+        opacity: var(--ghost-color-opacity);
+        border: 1px solid var(--ghost-color);
+        border-bottom-left-radius: 100%;
+        border-bottom-right-radius: 100%;
+        box-shadow: 0 1px 10px 0px var(--ghost-color);
+        border-top: none;
+        animation: vertical-stretch var(--ghost-tentacles-stretch-animation-duration) ease-in-out infinite alternate;
+    }
+
+    span:nth-child(even) {
+        animation-delay: calc(var(--ghost-tentacles-stretch-animation-duration) * 1.23);
+    }
+}

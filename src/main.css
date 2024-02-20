@@ -3,7 +3,7 @@
     --ghost-update-cycle: 375ms;
 
     --tile-size: calc(min(30px, calc(100svmin / 25)));
-    --game-actors-size: calc(var(--tile-size) * 0.65);
+    --game-actors-size: 65%;
 
     --fruit-color: greenyellow;
     --empty-color: black;
