@@ -20,7 +20,7 @@ export const GameConfig = {
         ),
     ghostStateTimesInMs: {
         chase: 20000,
-        scatter: 10000,
-        frightened: 10000,
+        scatter: 5000,
+        frightened: 7500,
     },
 }

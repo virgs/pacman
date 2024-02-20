@@ -1,10 +1,10 @@
-import { emitPowerUpPositioned, usePacmanPoweredUpListener } from '../events/Events'
+import { emitPowerUpPositioned, useGameActorMovedListener, usePacmanPoweredUpListener } from '../events/Events'
 import { Tile } from '../map/Tile'
 import { TileMap } from '../map/TileMap'
 import { Origin, Point, squaredDistanceBetweenPoints } from '../math/Point'
 
 export class PowerUpManager {
-    private static readonly MIN_DISTANCE_TO_PACMAN_SQUARED = 8 ** 2
+    private static readonly MIN_DISTANCE_TO_PACMAN_SQUARED = 10 ** 2
     private readonly availableSpots: Point[]
     private pacmanCurrentPosition: Point
     private _position: Point
@@ -14,6 +14,11 @@ export class PowerUpManager {
         this.pacmanCurrentPosition = tileMap.tilePositions.get(Tile.PACMAN)?.[0] ?? Origin
         this._position = this.positionPowerUp()
 
+        useGameActorMovedListener(payload => {
+            if (payload.tile === Tile.PACMAN) {
+                this._position = payload.position;
+            }
+        })
         usePacmanPoweredUpListener(() => this.positionPowerUp())
     }
 
@@ -27,7 +32,8 @@ export class PowerUpManager {
                 squaredDistanceBetweenPoints(this.pacmanCurrentPosition, position) >
                 PowerUpManager.MIN_DISTANCE_TO_PACMAN_SQUARED
         )
-        this._position = spotsFurtherThanMinDistance[Math.floor(Math.random() * spotsFurtherThanMinDistance.length)]
+        const randomindex = Math.floor(Math.random() * spotsFurtherThanMinDistance.length)
+        this._position = spotsFurtherThanMinDistance[randomindex]
         emitPowerUpPositioned({ position: this._position })
         return this._position
     }

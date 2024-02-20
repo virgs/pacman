@@ -27,7 +27,7 @@ export const sumPoints = (a: Point, b: Point): Point => {
 }
 
 export const squaredDistanceBetweenPoints = (a: Point, b: Point): number => {
-    return (a.x - b.x) ** 2 + (a.y - b.y) ** 2
+    return ((a.x - b.x) ** 2) + ((a.y - b.y) ** 2)
 }
 
 export const vectorApproximateDirection = (
