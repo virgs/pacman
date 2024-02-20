@@ -17,11 +17,18 @@ export type GameActorMovedEventType = {
 export type GhostStateChangedEventType = {
     state: GhostState
 }
+
 export type PowerUpPositionedEventType = {
     position: Point
 }
+
+export type PacmanTouchedGhostEventType = {
+    ghost: Tile
+}
 export const { useGhostStateChangedListener, emitGhostStateChanged } = createEvent('ghost-state-changed')<GhostStateChangedEventType>()
 export const { useHeroActionListener, emitHeroAction } = createEvent('hero-action')<HeroActionEventType>()
+export const { usePacmanTouchedGhostListener, emitPacmanTouchedGhost } = createEvent('pacman-touched-ghost')<PacmanTouchedGhostEventType>()
+export const { usePacmanPoweredUpListener, emitPacmanPoweredUp } = createEvent('pacman-powered-up')<void>()
 export const { usePowerUpPositionedListener, emitPowerUpPositioned } = createEvent('power-up-positioned')<PowerUpPositionedEventType>()
 export const { useGameActorMovedListener, emitGameActorMoved } =
     createEvent('game-actor-moved')<GameActorMovedEventType>()

@@ -17,7 +17,6 @@ export const PowerUpComponent = (props: PowerUpComponentProps): JSX.Element => {
         top: props.powerUpManager.position.y * tileSize + 'px',
     })
 
-    console.log(containerStyle)
     usePowerUpPositionedListener(payload => {
         console.log(containerStyle)
         setContainerStyle({
