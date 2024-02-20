@@ -2,9 +2,7 @@ import { useState } from 'react'
 import { GameConfig } from '../config'
 import { Direction } from '../direction/Direction'
 import { Pacman } from '../engine/Pacman'
-import { emitGameActorMoved } from '../events/Events'
 import { useInterval } from '../hooks/UseInterval'
-import { Tile } from '../map/Tile'
 import './PacmanComponent.scss'
 
 export type PacmanComponentProps = {

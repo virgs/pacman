@@ -17,7 +17,11 @@ export type GameActorMovedEventType = {
 export type GhostStateChangedEventType = {
     state: GhostState
 }
+export type PowerUpPositionedEventType = {
+    position: Point
+}
 export const { useGhostStateChangedListener, emitGhostStateChanged } = createEvent('ghost-state-changed')<GhostStateChangedEventType>()
 export const { useHeroActionListener, emitHeroAction } = createEvent('hero-action')<HeroActionEventType>()
+export const { usePowerUpPositionedListener, emitPowerUpPositioned } = createEvent('power-up-positioned')<PowerUpPositionedEventType>()
 export const { useGameActorMovedListener, emitGameActorMoved } =
     createEvent('game-actor-moved')<GameActorMovedEventType>()

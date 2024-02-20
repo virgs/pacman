@@ -1,0 +1,12 @@
+.power-up-container {
+    position: absolute;
+    width: var(--tile-size);
+    height: var(--tile-size);
+}
+
+.power-up-body {
+    --fa-beat-scale: 1.15;
+    --fa-animation-duration: 2.5s;
+    color: var(--fruit-color);
+    filter: drop-shadow(var(--fruit-color) 0 0 1px);
+}

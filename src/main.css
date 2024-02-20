@@ -5,6 +5,7 @@
     --tile-size: calc(min(30px, calc(100svmin / 25)));
     --game-actors-size: calc(var(--tile-size) * 0.65);
 
+    --fruit-color: greenyellow;
     --empty-color: black;
     --wall-color: blue;
     --pacman-body-color: #fdff00;

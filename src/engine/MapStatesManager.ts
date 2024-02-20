@@ -1,4 +1,4 @@
-import { GhostState } from '../engine/ghosts/GhostState';
+import { GhostState } from './ghosts/GhostState';
 import { emitGhostStateChanged } from '../events/Events';
 
 export class MapStateManager {
