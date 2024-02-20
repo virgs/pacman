@@ -5,7 +5,7 @@ import { Pacman } from './engine/Pacman'
 import { PowerUpManager } from './engine/PowerUpManager'
 import { GhostFactory } from './engine/ghosts/GhostFactory'
 import { GhostGameActorComponent } from './game-actors/GhostGameActorComponent'
-import { PacmanComponent } from './game-actors/PacmanComponent'
+import { PacmanGameActorComponent } from './game-actors/PacmanGameActorComponent'
 import { PowerUpGameActorComponent } from './game-actors/PowerUpGameActorComponent'
 import { TileMapComponent } from './components/TileMapComponent'
 import { InputComponent } from './input/InputComponent'
@@ -32,7 +32,7 @@ export default function Root(): JSX.Element {
             <div className="mx-auto" style={{ height: '100%' }}>
                 <TileMapComponent tileMap={tileMap} />
                 {...ghosts}
-                <PacmanComponent pacman={new Pacman(tileMap)} />
+                <PacmanGameActorComponent pacman={new Pacman(tileMap)} />
                 <PowerUpGameActorComponent powerUpManager={powerUpManager} />
             </div>
         </InputComponent>

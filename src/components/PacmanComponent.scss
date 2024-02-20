@@ -2,21 +2,10 @@
     --eat-animation-duration: calc(var(--pacman-update-cycle) * 0.75);
 }
 
-.pacman-container {
-    position: absolute;
-    width: var(--tile-size);
-    height: var(--tile-size);
-    transition: all linear var(--pacman-update-cycle);
-
-    >* {
-        width: var(--game-actors-size);
-        height: var(--game-actors-size);
-    }
-}
-
 .pacman-body {
     box-shadow: 0 0 10px 0px var(--pacman-body-color);
     border-radius: var(--game-actors-size);
+    transition: transform ease-in-out 200ms;
 
     div {
         display: flex;

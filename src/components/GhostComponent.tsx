@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import './GhostComponent.scss'
 
 type Props = {
-    dead: boolean,
-    frightened: boolean,
-    ghostName: string,
+    dead: boolean
+    frightened: boolean
+    ghostName: string
 }
 
 export const GhostComponent = (props: Props): JSX.Element => {
@@ -20,12 +20,10 @@ export const GhostComponent = (props: Props): JSX.Element => {
         } else {
             setGhostBodyClasses([...ghostBodyDefaultClasses])
         }
-
     }, [props])
 
     return (
-        <div data-ghost-name={props.ghostName.toString().toLowerCase()}
-            className={ghostBodyClasses.join(' ')}>
+        <div data-ghost-name={props.ghostName.toString().toLowerCase()} className={ghostBodyClasses.join(' ')}>
             <div className="ghost-eyes">
                 <div></div>
                 <div></div>

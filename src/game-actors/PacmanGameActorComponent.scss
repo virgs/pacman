@@ -1,10 +1,10 @@
-.ghost-game-actor {
+.pacman-game-actor {
     position: absolute;
     width: var(--tile-size);
     height: var(--tile-size);
-    transition: all linear var(--ghost-update-cycle);
+    transition: all linear var(--pacman-update-cycle);
 
-    > div {
+    > * {
         width: var(--game-actors-size);
         height: var(--game-actors-size);
     }

@@ -3,7 +3,7 @@ import { Tile } from '../map/Tile'
 import { TileMap } from '../map/TileMap'
 import './TileMapComponent.scss'
 
-type MapComponentProps = {
+type Props = {
     tileMap: TileMap
 }
 
@@ -32,7 +32,7 @@ function borderStyle(tileMap: TileMap, x: number, y: number) {
     return style
 }
 
-export const TileMapComponent = (props: MapComponentProps): JSX.Element => {
+export const TileMapComponent = (props: Props): JSX.Element => {
     const tileSize = GameConfig.getTileSizeInPixels()
 
     const walls: JSX.Element[] = []

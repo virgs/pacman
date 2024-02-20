@@ -44,7 +44,8 @@ export class TileMap {
                 this._tilePositions.get(tile)?.push(position) ?? this._tilePositions.set(tile, [position])
 
                 if (tile === Tile.PACMAN) {
-                    this._tilePositions.get(Tile.EMPTY)?.push(position) ?? this._tilePositions.set(Tile.EMPTY, [position])
+                    this._tilePositions.get(Tile.EMPTY)?.push(position) ??
+                        this._tilePositions.set(Tile.EMPTY, [position])
                     return Tile.EMPTY
                 } else if (GhostTiles.includes(tile)) {
                     this._tilePositions.get(Tile.GHOST_HOUSE)?.push(position) ??

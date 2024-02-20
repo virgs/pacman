@@ -13,8 +13,8 @@ type Props = {
 export const GhostGameActorComponent = (props: Props): JSX.Element => {
     const tileSize = GameConfig.getTileSizeInPixels()
     const ghostUpdateCycle = GameConfig.getGhostUpdatePerCycleInMs()
-    const [dead, setDead] = useState<boolean>(false);
-    const [frightened, setFrightened] = useState<boolean>(false);
+    const [dead, setDead] = useState<boolean>(false)
+    const [frightened, setFrightened] = useState<boolean>(false)
 
     const [containerStyle, setContainerStyle] = useState<React.CSSProperties>({
         left: props.ghost.position.x * tileSize + 'px',
@@ -43,14 +43,8 @@ export const GhostGameActorComponent = (props: Props): JSX.Element => {
     }, ghostUpdateCycle)
 
     return (
-        <div
-            style={containerStyle}
-            className="ghost-game-actor d-flex align-items-center"
-        >
-            <GhostComponent
-                dead={dead}
-                frightened={frightened}
-                ghostName={props.ghost.name}></GhostComponent>
+        <div style={containerStyle} className="ghost-game-actor d-flex align-items-center">
+            <GhostComponent dead={dead} frightened={frightened} ghostName={props.ghost.name}></GhostComponent>
         </div>
     )
 }

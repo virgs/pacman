@@ -1,27 +1,16 @@
 import { useState } from 'react'
+import { PacmanComponent } from '../components/PacmanComponent'
 import { GameConfig } from '../config'
 import { Direction } from '../direction/Direction'
 import { Pacman } from '../engine/Pacman'
 import { useInterval } from '../hooks/UseInterval'
-import './PacmanComponent.scss'
+import './PacmanGameActorComponent.scss'
 
-export type PacmanComponentProps = {
+type Props = {
     pacman: Pacman
 }
 
-const getHeroTransformOrientation = (direction: Direction): string => {
-    switch (direction) {
-        case Direction.UP:
-            return 'rotate(-90deg)'
-        case Direction.DOWN:
-            return 'rotate(90deg)'
-        case Direction.LEFT:
-            return 'scaleX(-1)'
-    }
-    return ''
-}
-
-export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
+export const PacmanGameActorComponent = (props: Props): JSX.Element => {
     const pacmanUpdateCycle = GameConfig.getPacmanUpdateCycleInMs()
     const tileSize = GameConfig.getTileSizeInPixels()
 
@@ -29,10 +18,14 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
         left: props.pacman.position.x * tileSize + 'px',
         top: props.pacman.position.y * tileSize + 'px',
     })
-    const [bodyStyle, setBodyStyle] = useState<React.CSSProperties>({})
+    const [direction, setDirection] = useState<Direction>(Direction.RIGHT)
+    const [moving, setMoving] = useState<boolean>(true)
 
     useInterval(() => {
         const tryResult = props.pacman.tryToMoveToDirection(props.pacman.direction)
+        setDirection(tryResult.direction)
+        setMoving(tryResult.success)
+
         if (tryResult.success) {
             const style = {
                 ...containerStyle,
@@ -49,22 +42,10 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
             })
             props.pacman.move(tryResult.direction, tryResult.newPosition)
         }
-        setBodyStyle({
-            transform: getHeroTransformOrientation(props.pacman.direction),
-        })
     }, pacmanUpdateCycle)
     return (
-        <div className="pacman-container d-flex align-items-center" style={containerStyle}>
-            <div className="pacman-body mx-auto" style={bodyStyle}>
-                <div>
-                    <div className="pacman-top-left"></div>
-                    <div className="pacman-top-right"></div>
-                </div>
-                <div style={{ marginTop: '0px' }}>
-                    <div className="pacman-bottom-left"></div>
-                    <div className="pacman-bottom-right"></div>
-                </div>
-            </div>
+        <div className="pacman-game-actor d-flex align-items-center" style={containerStyle}>
+            <PacmanComponent dead={false} direction={direction} moving={moving}></PacmanComponent>
         </div>
     )
 }
