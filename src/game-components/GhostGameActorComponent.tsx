@@ -3,14 +3,14 @@ import { GameConfig } from '../config'
 import { Ghost } from '../engine/ghosts/Ghost'
 import { GhostState } from '../engine/ghosts/GhostState'
 import { useInterval } from '../hooks/UseInterval'
-import './GhostComponent.scss'
-import { StatelessGhostComponent } from './StatelessGhostComponent'
+import './GhostGameActorComponent.scss'
+import { GhostComponent } from '../components/GhostComponent'
 
-export type GhostComponentProps = {
+type Props = {
     ghost: Ghost
 }
 
-export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
+export const GhostGameActorComponent = (props: Props): JSX.Element => {
     const tileSize = GameConfig.getTileSizeInPixels()
     const ghostUpdateCycle = GameConfig.getGhostUpdatePerCycleInMs()
     const [dead, setDead] = useState<boolean>(false);
@@ -45,12 +45,12 @@ export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
     return (
         <div
             style={containerStyle}
-            className="ghost-container d-flex align-items-center"
+            className="ghost-game-actor d-flex align-items-center"
         >
-            <StatelessGhostComponent
+            <GhostComponent
                 dead={dead}
                 frightened={frightened}
-                ghostName={props.ghost.name}></StatelessGhostComponent>
+                ghostName={props.ghost.name}></GhostComponent>
         </div>
     )
 }

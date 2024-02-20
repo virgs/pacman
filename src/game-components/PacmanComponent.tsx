@@ -33,7 +33,7 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
     const [bodyStyle, setBodyStyle] = useState<React.CSSProperties>({})
 
     useInterval(() => {
-        const tryResult = props.pacman.tryToMoveToDirection(props.pacman.direction, 1 / inputWindowCycles)
+        const tryResult = props.pacman.tryToMoveToDirection(props.pacman.direction)
         if (tryResult.success) {
             const style = {
                 ...containerStyle,
@@ -53,10 +53,10 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
         setBodyStyle({
             transform: getHeroTransformOrientation(props.pacman.direction),
         })
-    }, pacmanUpdateCycle / inputWindowCycles)
+    }, pacmanUpdateCycle)
     return (
         <div className="pacman-container d-flex align-items-center" style={containerStyle}>
-            <div className="game-actor pacman-body mx-auto" style={bodyStyle}>
+            <div className="pacman-body mx-auto" style={bodyStyle}>
                 <div>
                     <div className="pacman-top-left"></div>
                     <div className="pacman-top-right"></div>

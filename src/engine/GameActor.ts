@@ -40,8 +40,8 @@ export abstract class GameActor {
         return this._direction
     }
 
-    public tryToMoveToDirection(direction: Direction, offset: number = 1): TryToMoveResult {
-        const newPosition = moveTowardsDirection(this._position, direction, offset)
+    public tryToMoveToDirection(direction: Direction): TryToMoveResult {
+        const newPosition = moveTowardsDirection(this._position, direction)
         const newTilePosition = {
             x: Math.floor(newPosition.x),
             y: Math.floor(newPosition.y),

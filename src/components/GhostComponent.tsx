@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './StatelessGhostComponent.scss'
+import './GhostComponent.scss'
 
 type Props = {
     dead: boolean,
@@ -7,7 +7,7 @@ type Props = {
     ghostName: string,
 }
 
-export const StatelessGhostComponent = (props: Props): JSX.Element => {
+export const GhostComponent = (props: Props): JSX.Element => {
     const ghostBodyDefaultClasses = ['ghost-body', 'mx-auto']
 
     const [ghostBodyClasses, setGhostBodyClasses] = useState<string[]>(ghostBodyDefaultClasses)

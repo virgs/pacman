@@ -26,7 +26,7 @@ export const PowerUpComponent = (props: PowerUpComponentProps): JSX.Element => {
 
     return (
         <div className="power-up-container d-flex align-items-center" style={containerStyle}>
-            <FontAwesomeIcon icon={faLemon} className="game-actor power-up-body fa-beat mx-auto" />
+            <FontAwesomeIcon icon={faLemon} className="power-up-body fa-beat mx-auto" />
         </div>
     )
 }

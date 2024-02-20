@@ -2,6 +2,11 @@
     position: absolute;
     width: var(--tile-size);
     height: var(--tile-size);
+
+    >* {
+        width: var(--game-actors-size);
+        height: var(--game-actors-size);
+    }
 }
 
 .power-up-body {

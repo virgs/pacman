@@ -4,10 +4,10 @@ import { MapStateWavesManager } from './engine/MapStateWavesManager'
 import { Pacman } from './engine/Pacman'
 import { PowerUpManager } from './engine/PowerUpManager'
 import { GhostFactory } from './engine/ghosts/GhostFactory'
-import { GhostComponent } from './game-components/GhostComponent'
+import { GhostGameActorComponent } from './game-components/GhostGameActorComponent'
 import { PacmanComponent } from './game-components/PacmanComponent'
 import { PowerUpComponent } from './game-components/PowerUpComponent'
-import { TileMapComponent } from './game-components/TileMapComponent'
+import { TileMapComponent } from './components/TileMapComponent'
 import { InputComponent } from './input/InputComponent'
 import { GhostTiles } from './map/Tile'
 import { TileMap } from './map/TileMap'
@@ -24,7 +24,7 @@ export default function Root(): JSX.Element {
 
     const ghostFactory = new GhostFactory(tileMap)
     const ghosts = GhostTiles.filter((ghostTile) => ghostFactory.hasGhost(ghostTile)).map((ghostTile) => (
-        <GhostComponent ghost={ghostFactory.createGhost(ghostTile)!} />
+        <GhostGameActorComponent ghost={ghostFactory.createGhost(ghostTile)!} />
     ))
 
     return (
