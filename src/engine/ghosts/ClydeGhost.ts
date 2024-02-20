@@ -14,17 +14,12 @@ export class ClydeGhost extends Ghost {
         const pacmanMove = this._actorsMoveTrackerMap.get(Tile.PACMAN)
 
         if (pacmanMove) {
-            const squaredDistanceToPacman = squaredDistanceBetweenPoints(
-                pacmanMove.position,
-                this._position
-            )
+            const squaredDistanceToPacman = squaredDistanceBetweenPoints(pacmanMove.position, this._position)
             if (squaredDistanceToPacman < ClydeGhost.MIN_TILES_AWAY_FROM_PACMAN_SQUARED) {
                 this._targetPosition = this._ghostCorner
             } else {
                 this._targetPosition = pacmanMove.position
             }
-
         }
     }
-
 }

@@ -21,7 +21,7 @@ export const GhostComponent = (props: GhostComponentProps): JSX.Element => {
     })
 
     useInterval(() => {
-        if (props.ghost.ghostState === GhostState.EATEN) {
+        if (props.ghost.dead) {
             setGhostBodyClasses([...ghostBodyDefaultClasses, 'dead-ghost'])
         } else if (props.ghost.ghostState === GhostState.FRIGHTENED) {
             setGhostBodyClasses([...ghostBodyDefaultClasses, 'frightened-ghost'])

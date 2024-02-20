@@ -10,8 +10,7 @@ export class BlinkyGhost extends Ghost {
     protected updateTargetPosition(): void {
         const pacmanMove = this._actorsMoveTrackerMap.get(Tile.PACMAN)
         if (pacmanMove) {
-            this._targetPosition = pacmanMove.position;
+            this._targetPosition = pacmanMove.position
         }
     }
-
 }

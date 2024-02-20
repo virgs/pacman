@@ -23,7 +23,7 @@ export abstract class GameActor {
         actor: Tile,
         tileMap: TileMap,
         currentTilePosition: Point,
-        nonWalkableTiles: Tile[] = [Tile.WALL],
+        nonWalkableTiles: Tile[] = [Tile.WALL]
     ) {
         this.nonWalkableTiles = nonWalkableTiles
         this.tileMap = tileMap

@@ -18,4 +18,9 @@ export const GameConfig = {
                 .getPropertyValue('--ghost-update-cycle')
                 .replace(/[^0-9]*/g, '')
         ),
+    ghostStateTimesInMs: {
+        chase: 20000,
+        scatter: 10000,
+        frightened: 10000,
+    },
 }

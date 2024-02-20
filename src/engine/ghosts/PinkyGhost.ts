@@ -21,5 +21,4 @@ export class PinkyGhost extends Ghost {
             )
         }
     }
-
 }

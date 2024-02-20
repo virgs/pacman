@@ -11,7 +11,7 @@ export class TileMap {
             y: map.length,
             x: map[0].length,
         }
-        this._tilePositions = new Map();
+        this._tilePositions = new Map()
         this._map = this.buildTilePositions(map)
     }
 
@@ -41,15 +41,13 @@ export class TileMap {
         return map.map((line, y) =>
             line.map((tile, x) => {
                 const position = { x, y }
-                this._tilePositions.get(tile)?.push(position) ??
-                    this._tilePositions.set(tile, [position])
+                this._tilePositions.get(tile)?.push(position) ?? this._tilePositions.set(tile, [position])
 
                 if (tile === Tile.PACMAN) {
-                    this._tilePositions.get(tile)?.push(position) ??
-                        this._tilePositions.set(Tile.EMPTY, [position])
+                    this._tilePositions.get(Tile.EMPTY)?.push(position) ?? this._tilePositions.set(Tile.EMPTY, [position])
                     return Tile.EMPTY
                 } else if (GhostTiles.includes(tile)) {
-                    this._tilePositions.get(tile)?.push(position) ??
+                    this._tilePositions.get(Tile.GHOST_HOUSE)?.push(position) ??
                         this._tilePositions.set(Tile.GHOST_HOUSE, [position])
                     return Tile.GHOST_HOUSE
                 }

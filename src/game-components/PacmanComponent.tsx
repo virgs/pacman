@@ -53,7 +53,6 @@ export const PacmanComponent = (props: PacmanComponentProps): JSX.Element => {
         setBodyStyle({
             transform: getHeroTransformOrientation(props.pacman.direction),
         })
-
     }, pacmanUpdateCycle / inputWindowCycles)
     return (
         <div className="pacman-container d-flex align-items-center" style={containerStyle}>

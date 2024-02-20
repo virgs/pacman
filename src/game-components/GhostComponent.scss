@@ -5,34 +5,31 @@
     --ghost-tentacles-stretch-animation-duration: calc(var(--ghost-update-cycle) * 2.6);
     --ghost-float-animation-duration: calc(var(--ghost-update-cycle) * 1.6);
     --ghost-blur-fadein-animation-duration: calc(var(--ghost-update-cycle) * 4.7);
+    --ghost-color-opacity: 1;
 }
 
 [data-ghost-name='blinky'] {
     --ghost-color: var(--blinky-body-color);
-    --ghost-body-color: var(--blinky-body-color);
 }
 
 [data-ghost-name='pinky'] {
     --ghost-color: var(--pinky-body-color);
-    --ghost-body-color: var(--pinky-body-color);
 }
 
 [data-ghost-name='inky'] {
     --ghost-color: var(--inky-body-color);
-    --ghost-body-color: var(--inky-body-color);
 }
 
 [data-ghost-name='clyde'] {
     --ghost-color: var(--clyde-body-color);
-    --ghost-body-color: var(--clyde-body-color);
 }
 
 .dead-ghost {
-    --ghost-body-color: var(--dead-ghost-color);
+    --ghost-color-opacity: 0.1;
 }
 
 .frightened-ghost {
-    --ghost-body-color: var(--frightened-ghost-color);
+    --ghost-color: var(--frightened-ghost-color);
 }
 
 .ghost-container {
@@ -88,11 +85,12 @@
 
 .ghost-top {
     height: 80%;
-    border: 1px solid var(--ghost-body-color);
+    opacity: var(--ghost-color-opacity);
+    border: 1px solid var(--ghost-color);
     border-bottom: none;
     border-top-left-radius: 100%;
     border-top-right-radius: 100%;
-    box-shadow: 0 -1px 10px 0px var(--ghost-body-color);
+    box-shadow: 0 -1px 10px 0px var(--ghost-color);
     transition: height;
     animation: vertical-stretch var(--ghost-head-stretch-animation-duration) ease-in-out infinite alternate;
 }
@@ -110,10 +108,11 @@
     span {
         width: 33%;
         height: 30%;
-        border: 1px solid var(--ghost-body-color);
+        opacity: var(--ghost-color-opacity);
+        border: 1px solid var(--ghost-color);
         border-bottom-left-radius: 100%;
         border-bottom-right-radius: 100%;
-        box-shadow: 0 1px 10px 0px var(--ghost-body-color);
+        box-shadow: 0 1px 10px 0px var(--ghost-color);
         border-top: none;
         animation: vertical-stretch var(--ghost-tentacles-stretch-animation-duration) ease-in-out infinite alternate;
     }
