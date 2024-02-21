@@ -13,15 +13,15 @@ export const GameConfig = {
                 .replace(/[^0-9]*/g, '')
         ),
     ghostUpdateCycleTimesInMs: {
-        blinky: 400,
-        inky: 450,
-        pinky: 500,
-        clyde: 425,
+        blinky: 415,
+        inky: 500,
+        pinky: 525,
+        clyde: 450,
     },
     ghostStateTimesInMs: {
         chase: 40000,
         scatter: 5000,
-        frightened: 10000,
+        frightened: 5000,
     },
     ghostUnlockTimesInMs: {
         inky: 10000,

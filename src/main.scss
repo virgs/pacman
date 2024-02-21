@@ -2,7 +2,7 @@
 @use 'sass:string';
 
 :root {
-    --pacman-update-cycle: 400ms;
+    --pacman-update-cycle: 425ms;
     --ghost-update-cycle: 425ms;
 
     --tile-size: calc(min(30px, calc(100svmin / 25)));
