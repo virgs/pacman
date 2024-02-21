@@ -34,6 +34,7 @@
 
 .ghost-body {
     position: relative;
+    height: 100%;
     top: -3px;
     filter: blur(10px);
     animation:
@@ -64,9 +65,10 @@
 
     div {
         width: 50%;
+        opacity: 70%;
         border-radius: 100%;
         background-color: var(--ghost-color);
-        box-shadow: 0 1px 2px 1px var(--ghost-color);
+        box-shadow: 0 1px 10px 1px var(--ghost-color);
     }
 }
 

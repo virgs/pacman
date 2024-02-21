@@ -13,6 +13,9 @@ import { GhostTiles } from './map/Tile'
 import { TileMap } from './map/TileMap'
 import { TileMapParser } from './map/TileMapParser'
 import { CollisionManager } from './engine/CollisionManager'
+import { PacmanComponent } from './components/PacmanComponent'
+import { Direction } from './direction/Direction'
+import { GhostComponent } from './components/GhostComponent'
 
 const tiles = await new TileMapParser().parse()
 const tileMap = new TileMap(tiles)

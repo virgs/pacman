@@ -18,10 +18,15 @@ export const PacmanGameActorComponent = (props: Props): JSX.Element => {
         left: props.pacman.position.x * tileSize + 'px',
         top: props.pacman.position.y * tileSize + 'px',
     })
+    const [dead, setDead] = useState<boolean>(false)
     const [direction, setDirection] = useState<Direction>(Direction.RIGHT)
     const [moving, setMoving] = useState<boolean>(true)
 
     useInterval(() => {
+        setDead(props.pacman.dead)
+        if (props.pacman.dead) {
+            return
+        }
         const tryResult = props.pacman.tryToMoveToDirection(props.pacman.direction)
         setDirection(tryResult.direction)
         setMoving(tryResult.success)
@@ -45,7 +50,7 @@ export const PacmanGameActorComponent = (props: Props): JSX.Element => {
     }, pacmanUpdateCycle)
     return (
         <div className="pacman-game-actor d-flex align-items-center" style={containerStyle}>
-            <PacmanComponent dead={false} direction={direction} moving={moving}></PacmanComponent>
+            <PacmanComponent dead={dead} direction={direction} moving={moving}></PacmanComponent>
         </div>
     )
 }

@@ -1,20 +1,21 @@
 :root {
     --eat-animation-duration: calc(var(--pacman-update-cycle) * 0.75);
+    --death-animation-duration: 100ms;
 }
 
 .pacman-body {
+    height: 100%;
     box-shadow: 0 0 10px 0px var(--pacman-body-color);
     border-radius: var(--game-actors-size);
     transition: transform ease-in-out 200ms;
     display: flex;
-
 }
 
 .pacman-left-side {
     border: 1px solid var(--pacman-body-color);
     border-right: none;
-    border-bottom-left-radius: 100px;
-    border-top-left-radius: 100px;
+    border-bottom-left-radius: 1000px;
+    border-top-left-radius: 1000px;
     height: 100%;
     width: 50%;
 }
@@ -27,14 +28,18 @@
 .pacman-top-right-side {
     border: 1px solid var(--pacman-body-color);
     border-left: none;
-    border-top-right-radius: 100px;
+    border-top-right-radius: 1000px;
     height: 50%;
+
+    &.dead {
+        border-bottom: none;
+    }
 }
 
 .pacman-bottom-right-side {
     border: 1px solid var(--pacman-body-color);
     border-left: none;
-    border-bottom-right-radius: 100px;
+    border-bottom-right-radius: 1000px;
     height: 50%;
     transform-origin: top left;
     animation-name: eat-animation;
@@ -44,19 +49,60 @@
     animation-direction: alternate;
 }
 
-.pacman-alive-eye {
-    width: 2px;
-    height: 2px;
-    border-radius: 100%;
-    background-color: var(--pacman-body-color);
-    box-shadow: 0 0 5px 1px var(--pacman-body-color);
-    position: relative;
-    top: 40%;
-    left: 30%;
-}
-
 @keyframes eat-animation {
     to {
         transform: rotate(50deg);
+    }
+}
+
+.pacman-mouth {
+    height: 1px;
+    width: 50%;
+    position: absolute;
+    opacity: 0;
+    top: 50%;
+    right: 0%;
+    background-color: var(--pacman-body-color);
+    box-shadow: 0 0 5px 1px var(--pacman-body-color);
+    transition: all ease-out var(--death-animation-duration);
+
+    &.dead {
+        right: 25%;
+        opacity: 1;
+    }
+}
+
+.pacman-alive-eye {
+    width: 10%;
+    height: 10%;
+    border-radius: 100%;
+    background-color: var(--pacman-body-color);
+    box-shadow: 0 0 5px 1px var(--pacman-body-color);
+    position: absolute;
+    top: 25%;
+    right: 30%;
+    transition: all ease-out var(--death-animation-duration);
+
+    &.dead {
+        height: 2px;
+        border-radius: 0;
+        right: 65%;
+    }
+}
+
+.pacman-dead-eye {
+    width: 0%;
+    height: 2px;
+    border-radius: 0;
+    background-color: var(--pacman-body-color);
+    box-shadow: 0 0 5px 1px var(--pacman-body-color);
+    position: absolute;
+    top: 25%;
+    right: 0%;
+    transition: all ease-out var(--death-animation-duration);
+
+    &.dead {
+        width: 10%;
+        right: 25%;
     }
 }

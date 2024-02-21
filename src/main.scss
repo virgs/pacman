@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use "sass:string";
+
 :root {
     --pacman-update-cycle: 300ms;
     --ghost-update-cycle: 375ms;
@@ -5,22 +8,35 @@
     --tile-size: calc(min(30px, calc(100svmin / 25)));
     --game-actors-size: 65%;
 
-    --fruit-color: greenyellow;
+    --fruit-color: rgba(172, 255, 47, 1);
     --empty-color: black;
-    --wall-color: blue;
+    --wall-color: rgba(0, 0, 255, 1);
     --pacman-body-color: #fdff00;
     --blinky-body-color: #ff0000;
     --pinky-body-color: #ffb8ff;
     --inky-body-color: #00ffff;
     --clyde-body-color: #ffb852;
-    --frightened-ghost-color: blue;
-    /* --dead-ghost-color: rgb(211 211 211 / 25%); */
+    --frightened-ghost-color: rgba(0, 0, 255, 1);
 
     color-scheme: light dark;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --fruit-color: rgba(172, 255, 47, 0.85);
+        --empty-color: black;
+        --wall-color: rgba(0, 0, 255, 0.85);
+        --pacman-body-color: #fdff00CC;
+        --blinky-body-color: #ff0000CC;
+        --pinky-body-color: #ffb8ffCC;
+        --inky-body-color: #00ffffCC;
+        --clyde-body-color: #ffb852CC;
+        --frightened-ghost-color: rgba(0, 0, 255, 0.85);
+    }
 }
 
 html {
