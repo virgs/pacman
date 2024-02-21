@@ -79,30 +79,25 @@
     background-color: var(--pacman-body-color);
     box-shadow: 0 0 5px 1px var(--pacman-body-color);
     position: absolute;
-    top: 25%;
+    top: 30%;
     right: 30%;
     transition: all ease-out var(--death-animation-duration);
 
     &.dead {
         height: 2px;
         border-radius: 0;
-        right: 65%;
+        left: 30%;
     }
 }
 
 .pacman-dead-eye {
-    width: 0%;
+    width: 10%;
     height: 2px;
     border-radius: 0;
     background-color: var(--pacman-body-color);
     box-shadow: 0 0 5px 1px var(--pacman-body-color);
     position: absolute;
-    top: 25%;
-    right: 0%;
+    top: 30%;
+    right: 30%;
     transition: all ease-out var(--death-animation-duration);
-
-    &.dead {
-        width: 10%;
-        right: 25%;
-    }
 }

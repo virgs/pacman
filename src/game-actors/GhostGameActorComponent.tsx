@@ -12,7 +12,6 @@ type Props = {
 
 export const GhostGameActorComponent = (props: Props): JSX.Element => {
     const tileSize = GameConfig.getTileSizeInPixels()
-    const ghostUpdateCycle = GameConfig.getGhostUpdatePerCycleInMs()
     const [dead, setDead] = useState<boolean>(false)
     const [frightened, setFrightened] = useState<boolean>(false)
 
@@ -32,7 +31,7 @@ export const GhostGameActorComponent = (props: Props): JSX.Element => {
         if (result.overlapped) {
             style.transition = 'none'
         } else {
-            style.transition = `all linear ${ghostUpdateCycle}ms`
+            style.transition = `all linear ${props.ghost.updateCycleInMs}ms`
         }
         setContainerStyle({
             ...style,
@@ -40,7 +39,7 @@ export const GhostGameActorComponent = (props: Props): JSX.Element => {
             top: result.newPosition.y * tileSize + 'px',
         })
         props.ghost.move(result.direction, result.newPosition)
-    }, ghostUpdateCycle)
+    }, props.ghost.updateCycleInMs)
 
     return (
         <div style={containerStyle} className="ghost-game-actor d-flex align-items-center">

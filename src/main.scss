@@ -1,9 +1,9 @@
 @use 'sass:color';
-@use "sass:string";
+@use 'sass:string';
 
 :root {
-    --pacman-update-cycle: 300ms;
-    --ghost-update-cycle: 375ms;
+    --pacman-update-cycle: 400ms;
+    --ghost-update-cycle: 425ms;
 
     --tile-size: calc(min(30px, calc(100svmin / 25)));
     --game-actors-size: 65%;
@@ -30,11 +30,11 @@
         --fruit-color: rgba(172, 255, 47, 0.85);
         --empty-color: black;
         --wall-color: rgba(0, 0, 255, 0.85);
-        --pacman-body-color: #fdff00CC;
-        --blinky-body-color: #ff0000CC;
-        --pinky-body-color: #ffb8ffCC;
-        --inky-body-color: #00ffffCC;
-        --clyde-body-color: #ffb852CC;
+        --pacman-body-color: #fdff00cc;
+        --blinky-body-color: #ff0000cc;
+        --pinky-body-color: #ffb8ffcc;
+        --inky-body-color: #00ffffcc;
+        --clyde-body-color: #ffb852cc;
         --frightened-ghost-color: rgba(0, 0, 255, 0.85);
     }
 }

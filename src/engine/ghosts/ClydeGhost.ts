@@ -1,3 +1,4 @@
+import { GameConfig } from '../../config'
 import { Tile } from '../../map/Tile'
 import { TileMap } from '../../map/TileMap'
 import { squaredDistanceBetweenPoints } from '../../math/Point'
@@ -21,5 +22,14 @@ export class ClydeGhost extends Ghost {
                 this._targetPosition = pacmanMove.position
             }
         }
+    }
+
+    protected get lockTimeInMs(): number {
+        return GameConfig.ghostUnlockTimesInMs.clyde
+    }
+
+
+    protected get updateCycleInMs(): number {
+        return GameConfig.ghostUpdateCycleTimesInMs.clyde
     }
 }

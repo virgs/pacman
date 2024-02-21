@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './Root.scss'
+import { TileMapComponent } from './components/TileMapComponent'
+import { CollisionManager } from './engine/CollisionManager'
 import { MapStateWavesManager } from './engine/MapStateWavesManager'
 import { Pacman } from './engine/Pacman'
 import { PowerUpManager } from './engine/PowerUpManager'
@@ -7,15 +9,10 @@ import { GhostFactory } from './engine/ghosts/GhostFactory'
 import { GhostGameActorComponent } from './game-actors/GhostGameActorComponent'
 import { PacmanGameActorComponent } from './game-actors/PacmanGameActorComponent'
 import { PowerUpGameActorComponent } from './game-actors/PowerUpGameActorComponent'
-import { TileMapComponent } from './components/TileMapComponent'
 import { InputComponent } from './input/InputComponent'
 import { GhostTiles } from './map/Tile'
 import { TileMap } from './map/TileMap'
 import { TileMapParser } from './map/TileMapParser'
-import { CollisionManager } from './engine/CollisionManager'
-import { PacmanComponent } from './components/PacmanComponent'
-import { Direction } from './direction/Direction'
-import { GhostComponent } from './components/GhostComponent'
 
 const tiles = await new TileMapParser().parse()
 const tileMap = new TileMap(tiles)

@@ -14,6 +14,7 @@ import { GhostState } from './GhostState'
 
 export abstract class Ghost extends GameActor {
     private _dead: boolean
+    private locked: boolean
     private readonly _name: string
     protected readonly _ghostCorner: Point
     protected readonly _actorsMoveTrackerMap: Map<Tile, GameActorMovedEventType>
@@ -26,6 +27,7 @@ export abstract class Ghost extends GameActor {
         }
         const initialPosition = tileMap.tilePositions.get(ghostTile)![0]
         super(ghostTile, tileMap, initialPosition)
+        this.locked = true
         this._dead = false
         this._ghostState = GhostState.CHASE
         this._actorsMoveTrackerMap = new Map()
@@ -36,7 +38,12 @@ export abstract class Ghost extends GameActor {
         this.initializeEventListeners()
     }
 
+    protected abstract get lockTimeInMs(): number
+    public abstract get updateCycleInMs(): number
+
     private initializeEventListeners() {
+        setTimeout(() => this.locked = false, this.lockTimeInMs)
+
         useGameActorMovedListener((payload) => {
             this._actorsMoveTrackerMap.set(payload.tile, payload)
         })
@@ -74,6 +81,9 @@ export abstract class Ghost extends GameActor {
     }
 
     public getNextMove(): TryToMoveResult {
+        if (this.locked) {
+            return this.wanderInTheGhostHouse();
+        }
         this.updateTargetPosition()
         if (this.dead) {
             if (this.tileMap.getTileOfPosition(this.position) === Tile.GHOST_HOUSE) {
@@ -91,6 +101,14 @@ export abstract class Ghost extends GameActor {
             case GhostState.FRIGHTENED:
                 return this.moveRandomly()
         }
+    }
+
+    private wanderInTheGhostHouse() {
+        const keepGoing = this.tryToMoveToDirection(this._direction)
+        if (keepGoing.success) {
+            return keepGoing
+        }
+        return this.tryToMoveToDirection(getOppositeDirection(this._direction))
     }
 
     private moveRandomly(): TryToMoveResult {

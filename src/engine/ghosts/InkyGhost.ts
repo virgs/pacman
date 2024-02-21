@@ -1,3 +1,4 @@
+import { GameConfig } from '../../config'
 import { Tile } from '../../map/Tile'
 import { TileMap } from '../../map/TileMap'
 import { moveTowardsDirection, subtractPoints, sumPoints } from '../../math/Point'
@@ -22,5 +23,14 @@ export class InkyGhost extends Ghost {
             const subtractionVector = subtractPoints(inFrontOfPacmanPosition, blinkyGhostMove.position)
             this._targetPosition = sumPoints(inFrontOfPacmanPosition, subtractionVector)
         }
+    }
+
+    protected get lockTimeInMs(): number {
+        return GameConfig.ghostUnlockTimesInMs.inky
+    }
+
+
+    protected get updateCycleInMs(): number {
+        return GameConfig.ghostUpdateCycleTimesInMs.inky
     }
 }

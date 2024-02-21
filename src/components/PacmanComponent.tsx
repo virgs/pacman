@@ -47,23 +47,23 @@ export const PacmanComponent = (props: Props): JSX.Element => {
             setPreviousHorizontalDirection(props.direction)
         }
         setBodyStyle({
-            transform: getBodyTransform()
+            transform: getBodyTransform(),
         })
         const newMouthStyle = {
             ...mouthStyle,
-            animationName: (props.moving && !props.dead) ? 'eat-animation' : 'none',
-            borderTop: props.dead ? 'none' : ''
-        };
+            animationName: props.moving && !props.dead ? 'eat-animation' : 'none',
+            borderTop: props.dead ? 'none' : '',
+        }
         setMouthStyle(newMouthStyle)
-
-
     }, [props])
 
     const renderFace = (): JSX.Element => {
         if (props.dead) {
-            return <>
-                <div className="pacman-dead-eye dead"></div>
-            </>
+            return (
+                <>
+                    <div className="pacman-dead-eye dead"></div>
+                </>
+            )
         }
         return <></>
     }
@@ -72,13 +72,10 @@ export const PacmanComponent = (props: Props): JSX.Element => {
         <div className="pacman-body mx-auto" style={bodyStyle}>
             <div className={`pacman-mouth ${props.dead ? 'dead' : ''}`}></div>
             <div className={`pacman-alive-eye ${props.dead ? 'dead' : ''}`}></div>
-            {
-                renderFace()
-            }
+            {renderFace()}
             <div className="pacman-left-side"></div>
             <div className="pacman-right-side">
-                <div className={`pacman-top-right-side ${props.dead ? 'dead' : ''}`}>
-                </div>
+                <div className={`pacman-top-right-side ${props.dead ? 'dead' : ''}`}></div>
                 <div style={mouthStyle} className="pacman-bottom-right-side"></div>
             </div>
         </div>

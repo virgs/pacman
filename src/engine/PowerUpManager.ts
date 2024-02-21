@@ -14,9 +14,9 @@ export class PowerUpManager {
         this.pacmanCurrentPosition = tileMap.tilePositions.get(Tile.PACMAN)?.[0] ?? Origin
         this._position = this.positionPowerUp()
 
-        useGameActorMovedListener(payload => {
+        useGameActorMovedListener((payload) => {
             if (payload.tile === Tile.PACMAN) {
-                this._position = payload.position;
+                this._position = payload.position
             }
         })
         usePacmanPoweredUpListener(() => this.positionPowerUp())

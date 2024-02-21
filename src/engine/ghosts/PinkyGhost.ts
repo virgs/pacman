@@ -1,3 +1,4 @@
+import { GameConfig } from '../../config'
 import { Tile } from '../../map/Tile'
 import { TileMap } from '../../map/TileMap'
 import { Origin, moveTowardsDirection } from '../../math/Point'
@@ -20,5 +21,14 @@ export class PinkyGhost extends Ghost {
                 PinkyGhost.TILES_IN_FRONT_PACMAN
             )
         }
+    }
+
+    protected get lockTimeInMs(): number {
+        return GameConfig.ghostUnlockTimesInMs.pinky
+    }
+
+
+    protected get updateCycleInMs(): number {
+        return GameConfig.ghostUpdateCycleTimesInMs.pinky
     }
 }

@@ -1,3 +1,4 @@
+import { GameConfig } from '../../config'
 import { Tile } from '../../map/Tile'
 import { TileMap } from '../../map/TileMap'
 import { Ghost } from './Ghost'
@@ -12,5 +13,13 @@ export class BlinkyGhost extends Ghost {
         if (pacmanMove) {
             this._targetPosition = pacmanMove.position
         }
+    }
+
+    protected get lockTimeInMs(): number {
+        return 0
+    }
+
+    protected get updateCycleInMs(): number {
+        return GameConfig.ghostUpdateCycleTimesInMs.blinky
     }
 }

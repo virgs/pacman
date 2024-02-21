@@ -12,15 +12,20 @@ export const GameConfig = {
                 .getPropertyValue('--pacman-update-cycle')
                 .replace(/[^0-9]*/g, '')
         ),
-    getGhostUpdatePerCycleInMs: () =>
-        Number(
-            getComputedStyle(document.documentElement)
-                .getPropertyValue('--ghost-update-cycle')
-                .replace(/[^0-9]*/g, '')
-        ),
+    ghostUpdateCycleTimesInMs: {
+        blinky: 400,
+        inky: 450,
+        pinky: 500,
+        clyde: 425,
+    },
     ghostStateTimesInMs: {
-        chase: 20000,
+        chase: 40000,
         scatter: 5000,
-        frightened: 7500,
+        frightened: 10000,
+    },
+    ghostUnlockTimesInMs: {
+        inky: 10000,
+        pinky: 20000,
+        clyde: 30000,
     },
 }
