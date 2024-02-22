@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Root.scss'
 import { TileMapComponent } from './components/TileMapComponent'
 import { CollisionManager } from './engine/CollisionManager'
@@ -6,6 +6,7 @@ import { MapStateWavesManager } from './engine/MapStateWavesManager'
 import { Pacman } from './engine/Pacman'
 import { PowerUpManager } from './engine/PowerUpManager'
 import { GhostFactory } from './engine/ghosts/GhostFactory'
+import { usePacmanPoweredUpListener } from './events/Events'
 import { GhostGameActorComponent } from './game-actors/GhostGameActorComponent'
 import { PacmanGameActorComponent } from './game-actors/PacmanGameActorComponent'
 import { PowerUpGameActorComponent } from './game-actors/PowerUpGameActorComponent'
@@ -19,8 +20,16 @@ const tileMap = new TileMap(tiles)
 
 export default function Root(): JSX.Element {
     const [powerUpManager] = useState(new PowerUpManager(tileMap))
-    useState(new MapStateWavesManager())
-    useState(new CollisionManager(powerUpManager.position))
+    const [collisionManager] = useState(new CollisionManager(powerUpManager.position))
+    const [mapStateWavesManager] = useState(new MapStateWavesManager())
+
+    useEffect(() => {
+        return () => {
+            console.log('unmount')
+            // collisionManager.clear()
+            mapStateWavesManager.clear()
+        }
+    }, [])
 
     const ghostFactory = new GhostFactory(tileMap)
     const ghosts = GhostTiles.filter((ghostTile) => ghostFactory.hasGhost(ghostTile)).map((ghostTile) => (

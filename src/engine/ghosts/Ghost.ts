@@ -59,10 +59,10 @@ export abstract class Ghost extends GameActor {
         })
 
         useGhostStateChangedListener((payload) => {
-            this._ghostState = payload.state
-            if (!this.dead) {
+            if (!this.dead && this._ghostState !== payload.state) {
                 this._direction = getOppositeDirection(this.direction)
             }
+            this._ghostState = payload.state
         })
     }
 
@@ -84,15 +84,18 @@ export abstract class Ghost extends GameActor {
         if (this.locked) {
             return this.wanderInTheGhostHouse();
         }
-        this.updateTargetPosition()
         if (this.dead) {
             if (this.tileMap.getTileOfPosition(this.position) === Tile.GHOST_HOUSE) {
+                console.log('rebirth')
                 this._dead = false
                 this._direction = getOppositeDirection(this.direction)
                 return this.getNextMove()
             }
-            return this.getCloserTo(this.tileMap.tilePositions.get(Tile.GHOST_HOUSE)![1]) //any would work
+            const ghostHouses = this.tileMap.tilePositions.get(Tile.GHOST_HOUSE)!
+            const anyGhostHouse = ghostHouses[Math.floor(Math.random() * ghostHouses.length)]
+            return this.getCloserTo(anyGhostHouse) //any would work
         }
+        this.updateTargetPosition()
         switch (this.ghostState) {
             case GhostState.CHASE:
                 return this.getCloserTo(this._targetPosition)

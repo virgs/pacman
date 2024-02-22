@@ -6,13 +6,19 @@ export class MapStateWavesManager {
     private timer?: NodeJS.Timeout
 
     public constructor() {
-        this.goToChaseState()
         usePacmanPoweredUpListener(() => {
             clearTimeout(this.timer)
             emitGhostStateChanged({ state: GhostState.FRIGHTENED })
-            this.timer = setTimeout(() => this.goToChaseState(), GameConfig.ghostStateTimesInMs.frightened)
+            this.timer = setTimeout(() => {
+                return this.goToChaseState();
+            }, GameConfig.ghostStateTimesInMs.frightened)
         })
     }
+
+    public clear() {
+        clearTimeout(this.timer)
+    }
+
     private goToChaseState() {
         emitGhostStateChanged({ state: GhostState.CHASE })
         this.timer = setTimeout(() => this.goToScatterState(), GameConfig.ghostStateTimesInMs.chase)

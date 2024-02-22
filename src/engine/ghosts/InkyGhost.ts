@@ -29,8 +29,7 @@ export class InkyGhost extends Ghost {
         return GameConfig.ghostUnlockTimesInMs.inky
     }
 
-
-    protected get updateCycleInMs(): number {
+    public get updateCycleInMs(): number {
         return GameConfig.ghostUpdateCycleTimesInMs.inky
     }
 }

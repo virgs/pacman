@@ -16,10 +16,10 @@ export class BlinkyGhost extends Ghost {
     }
 
     protected get lockTimeInMs(): number {
-        return 0
+        return GameConfig.ghostUnlockTimesInMs.blinky
     }
 
-    protected get updateCycleInMs(): number {
+    public get updateCycleInMs(): number {
         return GameConfig.ghostUpdateCycleTimesInMs.blinky
     }
 }

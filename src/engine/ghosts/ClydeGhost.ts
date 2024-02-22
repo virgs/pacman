@@ -28,8 +28,7 @@ export class ClydeGhost extends Ghost {
         return GameConfig.ghostUnlockTimesInMs.clyde
     }
 
-
-    protected get updateCycleInMs(): number {
+    public get updateCycleInMs(): number {
         return GameConfig.ghostUpdateCycleTimesInMs.clyde
     }
 }

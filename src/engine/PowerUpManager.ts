@@ -12,24 +12,24 @@ export class PowerUpManager {
     public constructor(tileMap: TileMap) {
         this.availableSpots = tileMap.tilePositions.get(Tile.EMPTY) ?? []
         this.pacmanCurrentPosition = tileMap.tilePositions.get(Tile.PACMAN)?.[0] ?? Origin
-        this._position = this.positionPowerUp()
+        this._position = this.repositionPowerUp()
 
         useGameActorMovedListener((payload) => {
             if (payload.tile === Tile.PACMAN) {
                 this._position = payload.position
             }
         })
-        usePacmanPoweredUpListener(() => this.positionPowerUp())
+        usePacmanPoweredUpListener(() => this.repositionPowerUp())
     }
 
     public get position(): Point {
         return this._position
     }
 
-    private positionPowerUp(): Point {
+    private repositionPowerUp(): Point {
         const spotsFurtherThanMinDistance = this.availableSpots.filter(
             (position) =>
-                squaredDistanceBetweenPoints(this.pacmanCurrentPosition, position) >
+                squaredDistanceBetweenPoints(this.pacmanCurrentPosition, position) <
                 PowerUpManager.MIN_DISTANCE_TO_PACMAN_SQUARED
         )
         const randomindex = Math.floor(Math.random() * spotsFurtherThanMinDistance.length)
