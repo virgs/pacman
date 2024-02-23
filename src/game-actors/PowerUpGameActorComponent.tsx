@@ -5,6 +5,7 @@ import { GameConfig } from '../config'
 import { PowerUpManager } from '../engine/PowerUpManager'
 import './PowerUpGameActorComponent.scss'
 import { usePowerUpPositionedListener } from '../events/Events'
+import { FruitComponent } from '../components/FruitComponent'
 
 type Props = {
     powerUpManager: PowerUpManager
@@ -25,8 +26,8 @@ export const PowerUpGameActorComponent = (props: Props): JSX.Element => {
     })
 
     return (
-        <div className="power-up-game-actor d-flex align-items-center" style={containerStyle}>
-            <FontAwesomeIcon icon={faLemon} className="power-up-body fa-beat mx-auto" />
+        <div className="power-up-game-actor d-flex align-items-center mx-auto" style={containerStyle}>
+            <FruitComponent ></FruitComponent>
         </div>
     )
 }

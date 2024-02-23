@@ -2,16 +2,25 @@
     position: absolute;
     width: var(--tile-size);
     height: var(--tile-size);
+    justify-content: center;
 
-    > * {
+    >div {
         width: var(--game-actors-size);
         height: var(--game-actors-size);
     }
 }
 
-.power-up-body {
-    --fa-beat-scale: 1.15;
-    --fa-animation-duration: 2.5s;
-    color: var(--fruit-color);
-    filter: drop-shadow(var(--fruit-color) 0 0 1px);
-}
+// .power-up-body {
+
+//     height: 100%;
+
+//     >div {
+//         width: var(--game-actors-size);
+//         height: var(--game-actors-size);
+//     }
+// }
+
+// .pacman-game-actor>* {
+//     width: var(--game-actors-size);
+//     height: var(--game-actors-size);
+// }

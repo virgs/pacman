@@ -36,7 +36,7 @@ export class PowerUpManager {
         )
         const randomindex = Math.floor(Math.random() * spotsFurtherThanMinDistance.length)
         this._position = spotsFurtherThanMinDistance[randomindex]
-        emitPowerUpPositioned({ position: this._position })
+        emitPowerUpPositioned({ position: this._position, duration: GameConfig.powerUpTimeInMs })
         clearTimeout(this.timer)
         this.timer = setTimeout(() => this.repositionPowerUp(), GameConfig.powerUpTimeInMs)
         return this._position

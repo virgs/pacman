@@ -15,11 +15,13 @@ export type GameActorMovedEventType = {
 }
 
 export type GhostStateChangedEventType = {
-    state: GhostState
+    state: GhostState,
+    duration: number
 }
 
 export type PowerUpPositionedEventType = {
-    position: Point
+    position: Point,
+    duration: number
 }
 
 export type PacmanTouchedGhostEventType = {

@@ -1,6 +1,12 @@
 .score-info {
     display: inline-flex;
     gap: 10px;
+
+    transition: opacity 500ms ease;
+
+    &.fade-out {
+        opacity: 0;
+    }
 }
 
 .score-text {
@@ -12,6 +18,8 @@
 }
 
 .score-icon {
-    width: 20px;
-    height: 20px;
+    position: relative;
+    width: var(--tile-size);
+    height: var(--tile-size);
+
 }

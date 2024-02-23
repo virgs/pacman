@@ -35,7 +35,7 @@
 .ghost-body {
     position: relative;
     height: 100%;
-    top: -3px;
+    top: -2px;
     filter: blur(10px);
     animation:
         remove-blur var(--ghost-blur-fadein-animation-duration) forwards,
@@ -44,7 +44,7 @@
 
 @keyframes ghost-float {
     to {
-        top: 3px;
+        top: 2px;
     }
 }
 

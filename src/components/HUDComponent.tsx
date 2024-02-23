@@ -1,13 +1,13 @@
-import { faHourglass, faLemon } from "@fortawesome/free-regular-svg-icons";
-import { faGhost } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { GameConfig } from "../config";
-import { usePacmanDiedListener, usePacmanPoweredUpListener, usePowerUpPositionedListener } from "../events/Events";
+import { Direction } from "../direction/Direction";
+import { useGhostStateChangedListener, usePacmanDiedListener, usePowerUpPositionedListener } from "../events/Events";
 import { useInterval } from "../hooks/UseInterval";
-import "./HUDComponent.scss";
 import { Tile } from "../map/Tile";
+import { FruitComponent } from "./FruitComponent";
 import { GhostComponent } from "./GhostComponent";
+import "./HUDComponent.scss";
+import { PacmanComponent } from "./PacmanComponent";
+import { GameConfig } from "../config";
 
 const ONE_SECOND = 1000
 
@@ -18,16 +18,16 @@ export const HUDComponent = (): JSX.Element => {
     const [frightenedModeCountDown, setFrightenedModeCountDownCountdown] = useState<number | undefined>(undefined)
 
 
-    usePowerUpPositionedListener(() => {
-        setPowerUpCountdown(GameConfig.powerUpTimeInMs)
+    usePowerUpPositionedListener((payload) => {
+        setPowerUpCountdown(payload.duration)
     })
 
     usePacmanDiedListener(() => {
         setTimerEnabled(false)
     })
 
-    usePacmanPoweredUpListener(() => {
-        setFrightenedModeCountDownCountdown(GameConfig.ghostStateTimesInMs.frightened)
+    useGhostStateChangedListener((payload) => {
+        setFrightenedModeCountDownCountdown(payload.duration)
     })
 
     useInterval(
@@ -45,24 +45,11 @@ export const HUDComponent = (): JSX.Element => {
         },
         timerEnabled ? ONE_SECOND : undefined
     )
-    const renderGhostFrightenedCountdown = (): JSX.Element => {
-        if (frightenedModeCountDown === undefined) {
-            return <></>
-        }
-        return <>
-            <div className="score-icon">
-                <GhostComponent dead={false} ghostName={Tile[Tile.CLYDE]} frightened={true}></GhostComponent>
-            </div>
-            <div className="score-text">
-                {Math.floor(frightenedModeCountDown / 1000)}s
-            </div>
-        </>
-    }
 
     return <div className="row m-0 w-100 justify-content-evenly g-1">
         <div className="col-3 score-info">
             <div className="score-icon">
-                <FontAwesomeIcon icon={faHourglass} className="text-light" />
+                <PacmanComponent dead={!timerEnabled} direction={Direction.RIGHT} moving={timerEnabled} />
             </div>
             <div className="score-text">
                 {Math.floor(elapsedMiliseconds / 1000)}s
@@ -70,14 +57,20 @@ export const HUDComponent = (): JSX.Element => {
         </div>
         <div className="col-3 score-info">
             <div className="score-icon">
-                <FontAwesomeIcon icon={faLemon} className="text-light" />
+                <FruitComponent></FruitComponent>
             </div>
             <div className="text-end score-text">
                 {Math.floor(powerUpCountdown / 1000)}s
             </div>
         </div>
-        <div className="col-3 score-info">
-            {renderGhostFrightenedCountdown()}
+        <div className={`col-3 score-info ${frightenedModeCountDown ? '' : 'fade-out'}`}>
+            <div className="score-icon">
+                <GhostComponent dead={false} ghostName={Tile[Tile.CLYDE]} frightened={true} />
+            </div>
+            <div className="score-text">
+                {Math.floor((frightenedModeCountDown ?? 0) / 1000)}s
+            </div>
+
         </div>
     </div>;
 };

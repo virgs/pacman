@@ -8,7 +8,7 @@ export class MapStateWavesManager {
     public constructor() {
         usePacmanPoweredUpListener(() => {
             clearTimeout(this.timer)
-            emitGhostStateChanged({ state: GhostState.FRIGHTENED })
+            emitGhostStateChanged({ state: GhostState.FRIGHTENED, duration: GameConfig.ghostStateTimesInMs.frightened })
             this.timer = setTimeout(() => {
                 return this.goToChaseState();
             }, GameConfig.ghostStateTimesInMs.frightened)
@@ -20,12 +20,12 @@ export class MapStateWavesManager {
     }
 
     private goToChaseState() {
-        emitGhostStateChanged({ state: GhostState.CHASE })
+        emitGhostStateChanged({ state: GhostState.CHASE, duration: GameConfig.ghostStateTimesInMs.chase })
         this.timer = setTimeout(() => this.goToScatterState(), GameConfig.ghostStateTimesInMs.chase)
     }
 
     private goToScatterState() {
-        emitGhostStateChanged({ state: GhostState.SCATTER })
+        emitGhostStateChanged({ state: GhostState.SCATTER, duration: GameConfig.ghostStateTimesInMs.scatter })
         this.timer = setTimeout(() => this.goToChaseState(), GameConfig.ghostStateTimesInMs.scatter)
     }
 }
