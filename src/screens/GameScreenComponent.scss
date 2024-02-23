@@ -1,6 +1,6 @@
 .game-screen-component {}
 
 .board {
-    background-image: linear-gradient(#17082e 0, #1a0933 7%, #1a0933 80%, #0c1f4c 100%);
+    background: radial-gradient(black, var(--background-color) 50%);
     position: relative;
 }

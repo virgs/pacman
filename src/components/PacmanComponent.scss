@@ -67,7 +67,8 @@
     transition: all ease-out var(--death-animation-duration);
 
     &.dead {
-        right: 25%;
+        width: 30%;
+        right: 35%;
         opacity: 1;
     }
 }

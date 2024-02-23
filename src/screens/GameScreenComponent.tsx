@@ -14,6 +14,7 @@ import "./GameScreenComponent.scss"
 import { GameConfig } from "../config"
 import { Point } from "../math/Point"
 import { ArrowButtonsComponent } from "../components/ArrowButtonsComponent"
+import { HUDComponent } from "../components/HUDComponent"
 
 type Props = {
     tiles: Tile[][]
@@ -38,14 +39,16 @@ export const GameScreenComponent = (props: Props): JSX.Element => {
         <GhostGameActorComponent ghost={ghostFactory.createGhost(ghostTile)!} />
     ))
     return <div className="game-screen-component">
-        <div className="row justify-content-around g-1" style={{ height: '100%' }}>
+        <div className="row justify-content-around g-1 my-1" style={{ height: '100%' }}>
             <div className="col-12 col-md-6 p-0">
-                <div className="m-2">SCORE</div>
                 <div className="mx-auto board" style={{ width: boardDimension.x, height: boardDimension.y }}>
                     <TileMapComponent tileMap={tileMap} />
                     {...ghosts}
                     <PacmanGameActorComponent pacman={new Pacman(tileMap)} />
                     <PowerUpGameActorComponent powerUpManager={powerUpManager} />
+                </div>
+                <div className="mt-2" >
+                    <HUDComponent />
                 </div>
             </div>
             <div className="col-12 col-md-6 align-self-end d-lg-none px-4 pt-4 mt-5 mt-md-0" >

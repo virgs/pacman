@@ -1,3 +1,4 @@
+import { GameConfig } from '../config'
 import { emitPowerUpPositioned, useGameActorMovedListener, usePacmanPoweredUpListener } from '../events/Events'
 import { Tile } from '../map/Tile'
 import { TileMap } from '../map/TileMap'
@@ -7,6 +8,7 @@ export class PowerUpManager {
     private static readonly MIN_DISTANCE_TO_PACMAN_SQUARED = 10 ** 2
     private readonly availableSpots: Point[]
     private pacmanCurrentPosition: Point
+    private timer?: NodeJS.Timeout
     private _position: Point
 
     public constructor(tileMap: TileMap) {
@@ -35,6 +37,8 @@ export class PowerUpManager {
         const randomindex = Math.floor(Math.random() * spotsFurtherThanMinDistance.length)
         this._position = spotsFurtherThanMinDistance[randomindex]
         emitPowerUpPositioned({ position: this._position })
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => this.repositionPowerUp(), GameConfig.powerUpTimeInMs)
         return this._position
     }
 }
