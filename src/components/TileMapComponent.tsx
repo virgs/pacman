@@ -9,22 +9,22 @@ type Props = {
 
 function borderStyle(tileMap: TileMap, x: number, y: number) {
     const style: React.CSSProperties = {}
-    if (tileMap.getTileOfPosition({ x: x + 1, y }) === Tile.WALL || x === tileMap.dimension.x - 1) {
+    if (tileMap.getTileOfPosition({ x: x + 1, y }) === Tile.WALL) {
         style.borderRight = 'none'
         style.borderTopRightRadius = '0'
         style.borderBottomRightRadius = '0'
     }
-    if (tileMap.getTileOfPosition({ x: x - 1, y }) === Tile.WALL || x === 0) {
+    if (tileMap.getTileOfPosition({ x: x - 1, y }) === Tile.WALL) {
         style.borderLeft = 'none'
         style.borderTopLeftRadius = '0'
         style.borderBottomLeftRadius = '0'
     }
-    if (tileMap.getTileOfPosition({ x, y: y + 1 }) === Tile.WALL || y === tileMap.dimension.y - 1) {
+    if (tileMap.getTileOfPosition({ x, y: y + 1 }) === Tile.WALL) {
         style.borderBottom = 'none'
         style.borderBottomLeftRadius = '0'
         style.borderBottomRightRadius = '0'
     }
-    if (tileMap.getTileOfPosition({ x, y: y - 1 }) === Tile.WALL || y === 0) {
+    if (tileMap.getTileOfPosition({ x, y: y - 1 }) === Tile.WALL) {
         style.borderTop = 'none'
         style.borderTopLeftRadius = '0'
         style.borderTopRightRadius = '0'

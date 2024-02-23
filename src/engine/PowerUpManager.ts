@@ -29,7 +29,7 @@ export class PowerUpManager {
     private repositionPowerUp(): Point {
         const spotsFurtherThanMinDistance = this.availableSpots.filter(
             (position) =>
-                squaredDistanceBetweenPoints(this.pacmanCurrentPosition, position) <
+                squaredDistanceBetweenPoints(this.pacmanCurrentPosition, position) >
                 PowerUpManager.MIN_DISTANCE_TO_PACMAN_SQUARED
         )
         const randomindex = Math.floor(Math.random() * spotsFurtherThanMinDistance.length)

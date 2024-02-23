@@ -8,15 +8,15 @@
     --tile-size: calc(min(30px, calc(100svmin / 25)));
     --game-actors-size: 65%;
 
-    --fruit-color: rgba(172, 255, 47, 1);
+    --fruit-color: var(--bs-success); //rgba(172, 255, 47, 1);
     --empty-color: black;
-    --wall-color: rgba(0, 0, 255, 1);
-    --pacman-body-color: #fdff00;
-    --blinky-body-color: #ff0000;
-    --pinky-body-color: #ffb8ff;
-    --inky-body-color: #00ffff;
+    --wall-color: var(--bs-info); //rgba(0, 0, 255, 1);
+    --pacman-body-color: var(--bs-warning); //#fdff00;
+    --blinky-body-color: var(--bs-danger); // #ff0000;
+    --pinky-body-color: var(--bs-secondary); //#ffb8ff;
+    --inky-body-color: var(--bs-light); //#00ffff;
     --clyde-body-color: #ffb852;
-    --frightened-ghost-color: rgba(0, 0, 255, 1);
+    --frightened-ghost-color: var(--bs-info); //rgba(0, 0, 255, 1);
 
     color-scheme: light dark;
     font-synthesis: none;
@@ -26,17 +26,7 @@
 }
 
 @media screen and (prefers-color-scheme: dark) {
-    :root {
-        --fruit-color: rgba(172, 255, 47, 0.85);
-        --empty-color: black;
-        --wall-color: rgba(0, 0, 255, 0.85);
-        --pacman-body-color: #fdff00cc;
-        --blinky-body-color: #ff0000cc;
-        --pinky-body-color: #ffb8ffcc;
-        --inky-body-color: #00ffffcc;
-        --clyde-body-color: #ffb852cc;
-        --frightened-ghost-color: rgba(0, 0, 255, 0.85);
-    }
+    :root {}
 }
 
 html {
@@ -50,6 +40,7 @@ a {
 button:focus,
 button:active,
 button:focus-visible {
-    outline: none;
-    box-shadow: none;
+    background-color: unset !important;
+    outline: unset !important;
+    box-shadow: unset !important;
 }

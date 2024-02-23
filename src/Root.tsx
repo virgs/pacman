@@ -1,48 +1,28 @@
-import { useEffect, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import './Root.scss'
-import { TileMapComponent } from './components/TileMapComponent'
-import { CollisionManager } from './engine/CollisionManager'
-import { MapStateWavesManager } from './engine/MapStateWavesManager'
-import { Pacman } from './engine/Pacman'
-import { PowerUpManager } from './engine/PowerUpManager'
-import { GhostFactory } from './engine/ghosts/GhostFactory'
-import { usePacmanPoweredUpListener } from './events/Events'
-import { GhostGameActorComponent } from './game-actors/GhostGameActorComponent'
-import { PacmanGameActorComponent } from './game-actors/PacmanGameActorComponent'
-import { PowerUpGameActorComponent } from './game-actors/PowerUpGameActorComponent'
 import { InputComponent } from './input/InputComponent'
-import { GhostTiles } from './map/Tile'
-import { TileMap } from './map/TileMap'
-import { TileMapParser } from './map/TileMapParser'
-
-const tiles = await new TileMapParser().parse()
-const tileMap = new TileMap(tiles)
+import { Tile } from './map/Tile'
+import { GameScreenComponent } from './screens/GameScreenComponent'
+import SplashScreenComponent from './screens/SplashScreen'
 
 export default function Root(): JSX.Element {
-    const [powerUpManager] = useState(new PowerUpManager(tileMap))
-    const [collisionManager] = useState(new CollisionManager(powerUpManager.position))
-    const [mapStateWavesManager] = useState(new MapStateWavesManager())
+    const [showGameScreen, setShowGameScreen] = useState<boolean>(false);
+    const [parsedTiles, setParsedTiles] = useState<Tile[][] | undefined>(undefined);
 
-    useEffect(() => {
-        return () => {
-            console.log('unmount')
-            // collisionManager.clear()
-            mapStateWavesManager.clear()
+    const render = (): ReactNode => {
+        if (showGameScreen) {
+            return <GameScreenComponent tiles={parsedTiles!} />
         }
-    }, [])
-
-    const ghostFactory = new GhostFactory(tileMap)
-    const ghosts = GhostTiles.filter((ghostTile) => ghostFactory.hasGhost(ghostTile)).map((ghostTile) => (
-        <GhostGameActorComponent ghost={ghostFactory.createGhost(ghostTile)!} />
-    ))
+        return <SplashScreenComponent onRunGame={tiles => {
+            setParsedTiles(tiles)
+            setShowGameScreen(true)
+        }}></SplashScreenComponent>
+    }
 
     return (
         <InputComponent>
-            <div className="mx-auto" style={{ height: '100%' }}>
-                <TileMapComponent tileMap={tileMap} />
-                {...ghosts}
-                <PacmanGameActorComponent pacman={new Pacman(tileMap)} />
-                <PowerUpGameActorComponent powerUpManager={powerUpManager} />
+            <div className='container-fluid p-0'>
+                {render()}
             </div>
         </InputComponent>
     )

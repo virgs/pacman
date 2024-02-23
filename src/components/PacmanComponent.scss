@@ -1,5 +1,5 @@
 :root {
-    --eat-animation-duration: calc(var(--pacman-update-cycle) * 0.5);
+    --eat-animation-duration: calc(var(--pacman-update-cycle) * 0.33);
     --death-animation-duration: 100ms;
 }
 
