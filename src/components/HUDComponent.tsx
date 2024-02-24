@@ -1,75 +1,70 @@
 import { useState } from "react";
-import { Direction } from "../direction/Direction";
-import { useGhostStateChangedListener, usePacmanDiedListener, usePowerUpPositionedListener } from "../events/Events";
+import { GameConfig } from "../config";
+import { GhostState } from "../engine/ghosts/GhostState";
+import { useGhostStateChangedListener } from "../events/Events";
 import { useInterval } from "../hooks/UseInterval";
-import { Tile } from "../map/Tile";
 import { FruitComponent } from "./FruitComponent";
 import { GhostComponent } from "./GhostComponent";
 import "./HUDComponent.scss";
-import { PacmanComponent } from "./PacmanComponent";
-import { GameConfig } from "../config";
-import { GhostState } from "../engine/ghosts/GhostState";
 
-const ONE_SECOND = 1000
+const transitionIntervalInMs = 100
 
 export const HUDComponent = (): JSX.Element => {
-    const [timerEnabled, setTimerEnabled] = useState<boolean>(true)
-    const [elapsedMiliseconds, setElapsedMilliseconds] = useState<number>(0)
-    const [powerUpCountdown, setPowerUpCountdown] = useState<number>(GameConfig.powerUpTimeInMs)
-    const [frightenedModeCountDown, setFrightenedModeCountDownCountdown] = useState<number | undefined>(undefined)
-
-
-    usePowerUpPositionedListener((payload) => {
-        setPowerUpCountdown(payload.duration)
+    const [ghostStyle, setGhostStyle] = useState<React.CSSProperties>({
+        opacity: 0
     })
-
-    usePacmanDiedListener(() => {
-        setTimerEnabled(false)
-    })
+    const [transitionCount, setTransitionCount] = useState<number | undefined>(undefined)
+    const [scoreCounter, setScoreCounter] = useState<number>(0)
 
     useGhostStateChangedListener((payload) => {
         if (payload.state === GhostState.FRIGHTENED) {
-            setFrightenedModeCountDownCountdown(payload.duration)
+            setScoreCounter(score => score + 1)
+            setTransitionCount(0)
+            setGhostStyle({
+                opacity: 1,
+                filter: 'blur(0)',
+            })
         }
     })
 
     useInterval(
         () => {
-            setFrightenedModeCountDownCountdown(current => {
-                if (current !== undefined) {
-                    if (current <= 0) {
-                        return undefined
+            if (transitionCount !== undefined) {
+                if (transitionCount > GameConfig.powerUpEffectDurationInMs) {
+                    setTransitionCount(undefined)
+                } else {
+                    const newTransitionValue = transitionCount + transitionIntervalInMs
+                    setTransitionCount(newTransitionValue)
+                    const fadeOutStartThreshold = GameConfig.powerUpEffectDurationInMs * .75;
+                    if (newTransitionValue > fadeOutStartThreshold) {
+                        const excedent = newTransitionValue - fadeOutStartThreshold;
+                        const total = GameConfig.powerUpEffectDurationInMs - fadeOutStartThreshold;
+                        console.log((1 - (excedent / total)).toFixed(1))
+                        setGhostStyle({
+                            opacity: (1 - (excedent / total)).toFixed(1),
+                            filter: `blur(${(10 * (excedent / total)).toFixed(1)}px)`,
+                        })
                     }
-                    return current - 1000;
                 }
-            })
-            setPowerUpCountdown(current => current - 1000)
-            setElapsedMilliseconds((x) => x + 1000)
+            }
         },
-        timerEnabled ? ONE_SECOND : undefined
+        transitionIntervalInMs
     )
-
-    const calcBlur = (valueInMs: number, blurStartInMs: number = 5000): number => {
-        return 4
-    }
 
     return <div className="row m-0 w-100 justify-content-between g-1">
         <div className="col-3 score-info">
             <div className="score-icon">
-                <PacmanComponent dead={!timerEnabled} direction={Direction.RIGHT} moving={timerEnabled} />
-            </div>
-            <div className="score-text">
-                {Math.floor(elapsedMiliseconds / 1000)}s
-            </div>
-        </div>
-        <div className="col-3 score-info">
-            <div className="score-icon" style={{ filter: `blur(${calcBlur(powerUpCountdown, 5000)}px)` }}>
                 <FruitComponent></FruitComponent>
             </div>
+            <h1 className="score-text">
+                <small>x</small>
+                <strong>{scoreCounter}</strong>
+            </h1>
         </div>
-        <div className={`col-3 score-info ${frightenedModeCountDown ? '' : 'fade-out'}`}>
-            <div className="score-icon" style={{ filter: `blur(${calcBlur(frightenedModeCountDown ?? 0, 5000)}px)` }}>
-                <GhostComponent dead={false} ghostName={Tile[Tile.CLYDE]} frightened={true} />
+        <div className={`col-3 score-info`}
+            style={ghostStyle}>
+            <div className="score-icon" style={{ position: 'absolute', right: '0' }}>
+                <GhostComponent dead={false} ghostName={'John Doe'} frightened={true} />
             </div>
         </div>
     </div>;

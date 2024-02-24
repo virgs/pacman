@@ -8,10 +8,10 @@ export class MapStateWavesManager {
     public constructor() {
         usePacmanPoweredUpListener(() => {
             clearTimeout(this.timer)
-            emitGhostStateChanged({ state: GhostState.FRIGHTENED, duration: GameConfig.ghostStateTimesInMs.frightened })
+            emitGhostStateChanged({ state: GhostState.FRIGHTENED, duration: GameConfig.powerUpEffectDurationInMs })
             this.timer = setTimeout(() => {
                 return this.goToChaseState();
-            }, GameConfig.ghostStateTimesInMs.frightened)
+            }, GameConfig.powerUpEffectDurationInMs)
         })
     }
 

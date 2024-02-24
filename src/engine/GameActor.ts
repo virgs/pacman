@@ -28,7 +28,7 @@ export abstract class GameActor {
         this.tileMap = tileMap
         this._actorTile = actor
         this._position = currentTilePosition
-        this._direction = Direction.RIGHT
+        this._direction = [Direction.RIGHT, Direction.LEFT][Math.floor(Math.random() * 2)]
     }
 
     public get position(): Point {

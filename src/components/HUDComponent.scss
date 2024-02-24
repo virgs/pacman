@@ -1,13 +1,19 @@
 .score-info {
     display: inline-flex;
     gap: 10px;
+    filter: blur(0);
+    opacity: 1;
 
-    transition: all 500ms ease;
+    & small {
+        font-size: smaller;
+        padding: 0 5px 0 10px;
+    }
 }
 
 .score-text {
     //font-family: "Neonderthaw", cursive;
     font-family: "BhuTuka Expanded One", serif;
+    line-height: normal;
     font-weight: 400;
     font-style: normal;
     color: white;
@@ -15,6 +21,6 @@
 
 .score-icon {
     position: relative;
-    width: var(--tile-size);
-    height: var(--tile-size);
+    width: calc(1.5*var(--tile-size));
+    height: calc(1.5*var(--tile-size));
 }

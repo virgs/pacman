@@ -12,7 +12,8 @@ export const GameConfig = {
                 .getPropertyValue('--pacman-update-cycle')
                 .replace(/[^0-9]*/g, '')
         ),
-    powerUpTimeInMs: 15000,
+    powerUpRepositioningTimeInMs: 12500,
+    powerUpEffectDurationInMs: 5000,
     ghostUpdateCycleTimesInMs: {
         blinky: 450,
         inky: 500,
@@ -22,7 +23,6 @@ export const GameConfig = {
     ghostStateTimesInMs: {
         chase: 60000,
         scatter: 10000,
-        frightened: 5000,
     },
     ghostUnlockTimesInMs: {
         blinky: 5000,
