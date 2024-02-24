@@ -5,7 +5,7 @@
 
 .pacman-body {
     height: 100%;
-    box-shadow: 0 0 10px 0px var(--pacman-body-color);
+    box-shadow: -1.5px -1.5px 3px 1px var(--pacman-body-color);
     border-radius: var(--game-actors-size);
     transition: transform ease-in-out 200ms;
     display: flex;

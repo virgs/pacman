@@ -8,6 +8,7 @@ import { GhostComponent } from "./GhostComponent";
 import "./HUDComponent.scss";
 import { PacmanComponent } from "./PacmanComponent";
 import { GameConfig } from "../config";
+import { GhostState } from "../engine/ghosts/GhostState";
 
 const ONE_SECOND = 1000
 
@@ -27,7 +28,9 @@ export const HUDComponent = (): JSX.Element => {
     })
 
     useGhostStateChangedListener((payload) => {
-        setFrightenedModeCountDownCountdown(payload.duration)
+        if (payload.state === GhostState.FRIGHTENED) {
+            setFrightenedModeCountDownCountdown(payload.duration)
+        }
     })
 
     useInterval(
@@ -46,7 +49,11 @@ export const HUDComponent = (): JSX.Element => {
         timerEnabled ? ONE_SECOND : undefined
     )
 
-    return <div className="row m-0 w-100 justify-content-evenly g-1">
+    const calcBlur = (valueInMs: number, blurStartInMs: number = 5000): number => {
+        return 4
+    }
+
+    return <div className="row m-0 w-100 justify-content-between g-1">
         <div className="col-3 score-info">
             <div className="score-icon">
                 <PacmanComponent dead={!timerEnabled} direction={Direction.RIGHT} moving={timerEnabled} />
@@ -56,21 +63,14 @@ export const HUDComponent = (): JSX.Element => {
             </div>
         </div>
         <div className="col-3 score-info">
-            <div className="score-icon">
+            <div className="score-icon" style={{ filter: `blur(${calcBlur(powerUpCountdown, 5000)}px)` }}>
                 <FruitComponent></FruitComponent>
-            </div>
-            <div className="text-end score-text">
-                {Math.floor(powerUpCountdown / 1000)}s
             </div>
         </div>
         <div className={`col-3 score-info ${frightenedModeCountDown ? '' : 'fade-out'}`}>
-            <div className="score-icon">
+            <div className="score-icon" style={{ filter: `blur(${calcBlur(frightenedModeCountDown ?? 0, 5000)}px)` }}>
                 <GhostComponent dead={false} ghostName={Tile[Tile.CLYDE]} frightened={true} />
             </div>
-            <div className="score-text">
-                {Math.floor((frightenedModeCountDown ?? 0) / 1000)}s
-            </div>
-
         </div>
     </div>;
 };

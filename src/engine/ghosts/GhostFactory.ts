@@ -12,10 +12,10 @@ export class GhostFactory {
     public constructor(tileMap: TileMap) {
         this.tileMap = tileMap
         this.ghostMap = new Map()
-        this.ghostMap.set(Tile.BLINKY, () => new BlinkyGhost(this.tileMap))
-        this.ghostMap.set(Tile.PINKY, () => new PinkyGhost(this.tileMap))
-        this.ghostMap.set(Tile.INKY, () => new InkyGhost(this.tileMap))
-        this.ghostMap.set(Tile.CLYDE, () => new ClydeGhost(this.tileMap))
+        // this.ghostMap.set(Tile.BLINKY, () => new BlinkyGhost(this.tileMap))
+        // this.ghostMap.set(Tile.PINKY, () => new PinkyGhost(this.tileMap))
+        // this.ghostMap.set(Tile.INKY, () => new InkyGhost(this.tileMap))
+        // this.ghostMap.set(Tile.CLYDE, () => new ClydeGhost(this.tileMap))
     }
 
     public createGhost(ghostTile: Tile): Ghost | undefined {

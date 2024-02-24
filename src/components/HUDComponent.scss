@@ -2,11 +2,7 @@
     display: inline-flex;
     gap: 10px;
 
-    transition: opacity 500ms ease;
-
-    &.fade-out {
-        opacity: 0;
-    }
+    transition: all 500ms ease;
 }
 
 .score-text {
@@ -21,5 +17,4 @@
     position: relative;
     width: var(--tile-size);
     height: var(--tile-size);
-
 }

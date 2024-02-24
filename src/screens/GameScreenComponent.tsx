@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { GhostTiles, Tile } from "../map/Tile"
 import { TileMap } from "../map/TileMap"
 import { CollisionManager } from "../engine/CollisionManager"
@@ -21,6 +21,9 @@ type Props = {
 }
 
 export const GameScreenComponent = (props: Props): JSX.Element => {
+    const hudRef = useRef(null)
+    const boardRef = useRef(null)
+
     const [tileMap] = useState<TileMap>(new TileMap(props.tiles))
     const tileSize = GameConfig.getTileSizeInPixels();
     const [boardDimension] = useState<Point>({ x: tileMap.dimension.x * tileSize, y: tileMap.dimension.y * tileSize })
@@ -29,6 +32,8 @@ export const GameScreenComponent = (props: Props): JSX.Element => {
     const [] = useState(new CollisionManager(powerUpManager.position))
 
     useEffect(() => {
+        //@ts-expect-error
+        hudRef!.current!.style.width = boardRef!.current!.clientWidth + 'px'
         return () => {
             mapStateWavesManager.clear()
         }
@@ -39,19 +44,19 @@ export const GameScreenComponent = (props: Props): JSX.Element => {
         <GhostGameActorComponent ghost={ghostFactory.createGhost(ghostTile)!} />
     ))
     return <div className="game-screen-component">
-        <div className="row justify-content-around g-1 my-1" style={{ height: '100%' }}>
+        <div className="row justify-content-around g-1 my-1" style={{ height: '100svh' }}>
             <div className="col-12 col-md-6 p-0">
-                <div className="mx-auto board" style={{ width: boardDimension.x, height: boardDimension.y }}>
+                <div ref={boardRef} className="mx-auto board" style={{ width: boardDimension.x, height: boardDimension.y }}>
                     <TileMapComponent tileMap={tileMap} />
                     {...ghosts}
                     <PacmanGameActorComponent pacman={new Pacman(tileMap)} />
                     <PowerUpGameActorComponent powerUpManager={powerUpManager} />
                 </div>
-                <div className="mt-2" >
+                <div ref={hudRef} className="mt-2 mx-auto" >
                     <HUDComponent />
                 </div>
             </div>
-            <div className="col-12 col-md-6 align-self-end d-lg-none px-4 pt-4 mt-5 mt-md-0" >
+            <div className="col-12 col-md-6 align-self-end d-lg-none px-4 mb-5" >
                 <ArrowButtonsComponent />
             </div>
         </div>
