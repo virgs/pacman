@@ -76,6 +76,9 @@ It might go without saying, but just in case you didn't figure it out, the AI in
    Consider **P** the point 2 positions ahead of Pac-Man's position considering Pac-Man current direction and **B** *Blinky's* position. *Inky* chases the point **I** where **I** is **P** + (**P** - **B**).
 4. *Clyde*, as *Blinky* chases the Pac-Man position when it's 8 or more tiles away from it. Otherwise, goes back to its corner.
 
+As I mentioned earlier, the chase mechanism is not fancy at all. Some might think of something similar to simple A*, or BFS techniques, but it is even simpler. It goes like this: every time a ghost steps into a different tile, it checks the adjacent directions and the current on. So, if the ghost is moving rightwards, it checks the UP, RIGHT, and LEFT directions. Whichever is closest to the target (in Euclidian terms) it goes.  
+If there are no options - the ghost is on a dead-end, the ghost turns back. That's the only case the ghost turns back on its own. Other than that, the ghosts also turn back every time a ghost state is changed by the level (When the wave tells all ghosts that the SCATTER/CHASE/FRIGHTENED states are over). By doing so, it aids the player in identifying which wave is currently active and, thus, the player can make more informed decisions.
+
 ## Code It Yourself
 
 To do so, you'd have to rewrite a really small portion of the code and put your ideas instead.
