@@ -10,7 +10,7 @@ export class MapStateWavesManager {
             clearTimeout(this.timer)
             emitGhostStateChanged({ state: GhostState.FRIGHTENED, duration: GameConfig.powerUpEffectDurationInMs })
             this.timer = setTimeout(() => {
-                return this.goToChaseState();
+                return this.goToChaseState()
             }, GameConfig.powerUpEffectDurationInMs)
         })
     }

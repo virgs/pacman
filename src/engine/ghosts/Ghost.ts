@@ -42,7 +42,7 @@ export abstract class Ghost extends GameActor {
     public abstract get updateCycleInMs(): number
 
     private initializeEventListeners() {
-        setTimeout(() => this.locked = false, this.lockTimeInMs)
+        setTimeout(() => (this.locked = false), this.lockTimeInMs)
 
         useGameActorMovedListener((payload) => {
             this._actorsMoveTrackerMap.set(payload.tile, payload)
@@ -82,7 +82,7 @@ export abstract class Ghost extends GameActor {
 
     public getNextMove(): TryToMoveResult {
         if (this.locked) {
-            return this.wanderInTheGhostHouse();
+            return this.wanderInTheGhostHouse()
         }
         if (this.dead) {
             if (this.tileMap.getTileOfPosition(this.position) === Tile.GHOST_HOUSE) {

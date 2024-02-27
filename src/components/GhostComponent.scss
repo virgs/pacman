@@ -9,18 +9,22 @@
 }
 
 [data-ghost-name='blinky'] {
+    --ghos-animations-delay: 723ms;
     --ghost-color: var(--blinky-body-color);
 }
 
 [data-ghost-name='pinky'] {
+    --ghos-animations-delay: 280ms;
     --ghost-color: var(--pinky-body-color);
 }
 
 [data-ghost-name='inky'] {
+    --ghos-animations-delay: 581ms;
     --ghost-color: var(--inky-body-color);
 }
 
 [data-ghost-name='clyde'] {
+    --ghos-animations-delay: 621ms;
     --ghost-color: var(--clyde-body-color);
 }
 
@@ -40,6 +44,7 @@
     animation:
         remove-blur var(--ghost-blur-fadein-animation-duration) forwards,
         ghost-float var(--ghost-float-animation-duration) infinite alternate ease-in-out;
+    animation-delay: var(--ghos-animations-delay);
 }
 
 @keyframes ghost-float {
@@ -62,6 +67,7 @@
     height: 20%;
     display: flex;
     animation: eyes-animation var(--ghost-eyes-animation-duration) ease-in-out infinite alternate;
+    animation-delay: var(--ghos-animations-delay);
 
     div {
         width: 50%;
@@ -88,6 +94,7 @@
     box-shadow: 0 -1px 10px 0px var(--ghost-color);
     transition: height;
     animation: vertical-stretch var(--ghost-head-stretch-animation-duration) ease-in-out infinite alternate;
+    animation-delay: var(--ghos-animations-delay);
 }
 
 @keyframes vertical-stretch {
@@ -110,6 +117,7 @@
         box-shadow: 0 1px 10px 0px var(--ghost-color);
         border-top: none;
         animation: vertical-stretch var(--ghost-tentacles-stretch-animation-duration) ease-in-out infinite alternate;
+        animation-delay: var(--ghos-animations-delay);
     }
 
     span:nth-child(even) {

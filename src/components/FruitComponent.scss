@@ -2,7 +2,9 @@
     width: 100%;
     height: 100%;
     border-radius: 50% 15%;
-    box-shadow: inset 1px 1px var(--fruit-color), inset -1px -1px var(--fruit-color),
+    box-shadow:
+        inset 1px 1px var(--fruit-color),
+        inset -1px -1px var(--fruit-color),
         1px 1px 10px 0px var(--fruit-color);
     transform: rotate(200deg);
 }

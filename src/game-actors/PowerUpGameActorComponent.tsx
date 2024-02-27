@@ -16,7 +16,9 @@ export const PowerUpGameActorComponent = (props: Props): JSX.Element => {
         left: props.powerUpManager.position.x * tileSize + 'px',
         top: props.powerUpManager.position.y * tileSize + 'px',
     })
-    const [powerUpCountdown, setPowerUpCountdown] = useState<number>(Math.floor(GameConfig.powerUpRepositioningTimeInMs / 1000))
+    const [powerUpCountdown, setPowerUpCountdown] = useState<number>(
+        Math.floor(GameConfig.powerUpRepositioningTimeInMs / 1000)
+    )
 
     usePowerUpPositionedListener((payload) => {
         setPowerUpCountdown(Math.floor(payload.duration / 1000))
@@ -26,16 +28,16 @@ export const PowerUpGameActorComponent = (props: Props): JSX.Element => {
         })
     })
 
-    useInterval(
-        () => {
-            setPowerUpCountdown(current => current - 1)
-        },
-        1000
-    )
+    useInterval(() => {
+        setPowerUpCountdown((current) => current - 1)
+    }, 1000)
 
     return (
-        <div className={`power-up-game-actor d-flex align-items-center mx-auto ${powerUpCountdown < 5 ? 'fa-shake' : ''}`} style={containerStyle}>
-            <FruitComponent ></FruitComponent>
+        <div
+            className={`power-up-game-actor d-flex align-items-center mx-auto ${powerUpCountdown < 5 ? 'fa-shake' : ''}`}
+            style={containerStyle}
+        >
+            <FruitComponent></FruitComponent>
         </div>
     )
 }

@@ -12,7 +12,7 @@
 
 .score-text {
     //font-family: "Neonderthaw", cursive;
-    font-family: "BhuTuka Expanded One", serif;
+    font-family: 'BhuTuka Expanded One', serif;
     line-height: normal;
     font-weight: 400;
     font-style: normal;
@@ -21,6 +21,6 @@
 
 .score-icon {
     position: relative;
-    width: calc(1.5*var(--tile-size));
-    height: calc(1.5*var(--tile-size));
+    width: calc(1.5 * var(--tile-size));
+    height: calc(1.5 * var(--tile-size));
 }

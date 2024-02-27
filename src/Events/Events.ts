@@ -15,12 +15,12 @@ export type GameActorMovedEventType = {
 }
 
 export type GhostStateChangedEventType = {
-    state: GhostState,
+    state: GhostState
     duration: number
 }
 
 export type PowerUpPositionedEventType = {
-    position: Point,
+    position: Point
     duration: number
 }
 
@@ -31,6 +31,10 @@ export type PacmanTouchedGhostEventType = {
 export type PacmanDiedEventType = {
     ghost: Tile
 }
+
+export type FinalScoreEventType = {
+    score: number
+}
 export const { useGhostStateChangedListener, emitGhostStateChanged } =
     createEvent('ghost-state-changed')<GhostStateChangedEventType>()
 export const { useHeroActionListener, emitHeroAction } = createEvent('hero-action')<HeroActionEventType>()
@@ -40,5 +44,6 @@ export const { usePacmanPoweredUpListener, emitPacmanPoweredUp } = createEvent('
 export const { usePowerUpPositionedListener, emitPowerUpPositioned } =
     createEvent('power-up-positioned')<PowerUpPositionedEventType>()
 export const { usePacmanDiedListener, emitPacmanDied } = createEvent('pacman-died')<PacmanDiedEventType>()
+export const { useFinalScoreListener, emitFinalScore } = createEvent('final-score')<FinalScoreEventType>()
 export const { useGameActorMovedListener, emitGameActorMoved } =
     createEvent('game-actor-moved')<GameActorMovedEventType>()

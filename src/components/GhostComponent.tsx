@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import './GhostComponent.scss'
 
 type Props = {
-    dead: boolean
-    frightened: boolean
+    dead?: boolean
+    frightened?: boolean
     ghostName: string
 }
 
