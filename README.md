@@ -106,11 +106,4 @@ npm run format
 
 ## Bibliography
 
-1. [Algorithmic Approaches to Playing Minesweeper](https://cs50.harvard.edu/ai/2023/projects/1/minesweeper/)
-1. [Algorithms for Minesweeper Game Grid Generation](https://dspace.cvut.cz/bitstream/handle/10467/61624/F3-BP-2016-Cicvarek-Jan-Algorithms%20for%20Minesweeper%20Game%20Grid%20Generation.pdf)
-1. [Becerra, David J. 2015. Algorithmic Approaches to Playing Minesweeper](https://dash.harvard.edu/bitstream/handle/1/14398552/BECERRA-SENIORTHESIS-2015.pdf)
-1. [A solver of single-agent stochastic puzzle: A case study with Minesweeper](https://www.sciencedirect.com/science/article/pii/S0950705122002842)
-1. [Unknown author](http://honors.cs.umd.edu/reports/minesweeper.pdf)
-1. [nothings.org](https://minesweeper.online/statistics)
-1. [minesweeper.online](https://nothings.org/games/minesweeper/)
-1. [minesweepergame.com](https://minesweepergame.com/strategy/guessing.php)
+1. [Pac-man's ghosts' AI explained](https://youtu.be/ataGotQ7ir8?si=uz0xk3gQ8CyYhLvu)
