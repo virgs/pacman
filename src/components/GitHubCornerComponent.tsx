@@ -12,8 +12,8 @@ export function GithubCorner() {
                 height="80"
                 viewBox="0 0 250 250"
                 style={{
-                    // fill: 'var(--bs-primary)',
-                    // color: 'var(--bs-body-bg)',
+                    fill: 'var(--bs-primary)',
+                    color: 'var(--bs-body-bg)',
                     position: 'absolute',
                     top: 0,
                     border: 0,
