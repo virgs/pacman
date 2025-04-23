@@ -14,6 +14,7 @@ If you haven't done it yet, I highly recommend checking the other ones I have on
 - [Rubik's Cubes AI](https://github.com/virgs/rubiks-cubes-ai)
 - [Mancala](https://github.com/virgs/mancala)
 - [Tetris](https://github.com/virgs/tetris)
+- [Navigator's Gamble](https://github.com/virgs/navigators-gamble)
 
 ----
 
